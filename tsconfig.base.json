@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "tictactoe-typings": ["apps/typings/interfaces.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

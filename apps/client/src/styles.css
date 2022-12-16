@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+.square {
+  width: 100px;
+  height: 100px;
+  background-color: pink;
+  margin: 2px;
+}
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
