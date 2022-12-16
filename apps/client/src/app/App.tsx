@@ -8,10 +8,14 @@ export function App() {
   return (
     <>
       <div>
-        <Board player={player} setPlayer={setPlayer} />
-        {/* START: routes */}
-
-        {/* END: routes */}
+        <div className="navbar">
+          <h1>Tic Tac Toe</h1>
+        </div>
+        <div className="game">
+          <Board player={player} setPlayer={setPlayer} />
+          {/* START: routes */}
+          {/* END: routes */}
+        </div>
       </div>
     </>
   );

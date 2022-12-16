@@ -1,11 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+}
+.game {
+  background-color: hotpink;
+  width: auto;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: fit-content;
+}
+
 .square {
   width: 100px;
   height: 100px;
   background-color: pink;
   margin: 2px;
-}
-.board {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
 }
