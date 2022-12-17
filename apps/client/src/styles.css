@@ -2,25 +2,95 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: Solway;
+  box-sizing: border-box;
+
+  color: #fff;
+  /* color: rgb(170, 201, 213); */
 }
+.app {
+  height: 100vh;
+  width: 100vw;
+
+  background-color: rgb(183, 189, 168);
+}
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: baseline;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+  background-color: rgb(202, 201, 167);
+}
+.headline {
+  margin: 0.45rem;
+}
+h1.headline {
+  margin: 0;
+}
+p.headline {
+  font-weight: 300;
+}
+
+/* Board */
 .game {
-  background-color: hotpink;
+  /* background-color: rgb(170, 201, 213); */
+  background-color: rgb(183, 189, 168);
   width: auto;
   display: flex;
   margin: 0;
-  padding: 0;
+  padding: 1rem;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: fit-content;
+  gap: 0.25rem;
+  background-color: transparent;
 }
 
 .square {
+  justify-self: center;
+  align-self: end;
   width: 100px;
   height: 100px;
-  background-color: pink;
-  margin: 2px;
+  background-color: #ca256a;
+  border: none;
+  font-family: inherit;
+  padding: 0;
+  cursor: pointer;
+  color: rgb(170, 201, 213);
+  border-radius: 8px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+  font-size: xx-large;
+  font-weight: bolder;
+}
+.square:hover {
+  background-color: #c21d62;
+  transition: 210ms all ease-in-out;
+}
+.square:active {
+  transition: 100ms all ease-in-out;
+  width: 98%;
+  height: 98%;
+}
+
+img.avatar {
+  max-width: 100px;
+}
+
+/* display */
+.display {
+  display: block;
+  text-align: center;
+  line-height: 2.1em;
+  padding: 0.25em 0.75em;
+  min-width: 100px;
+  min-height: 44px;
+  margin-bottom: 0.35rem;
+  background-color: transparent;
+  font-size: medium;
 }
