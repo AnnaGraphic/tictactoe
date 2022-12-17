@@ -6,10 +6,10 @@ import { Square } from '../square/Square';
 
 export function Board(props) {
   const [board, setBoard] = useState(['', '', '', '', '', '', '', '', '']);
-  const [square, setSquare] = useState();
+  let ergebnis = null;
 
-  // +++ method +++
-  function handleClick(i, newValue) {
+  // +++ methods +++
+  function handleTurn(i, newValue) {
     let hasUpdated = false;
     console.log('click');
     let newBoard = board.map((oldValue, index) => {
@@ -19,8 +19,38 @@ export function Board(props) {
       }
       return oldValue;
     });
+
+    function checkforWin() {
+      const winCombos = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+      let winner = null;
+      console.log('winner', winner);
+      winCombos.forEach(function (combo, index) {
+        //console.log('combo', combo, 'index', index);
+        console.log('props.win, props.player', props.win, props.player);
+        if (
+          board[combo[0]] &&
+          board[combo[0]] === board[combo[1]] &&
+          board[combo[0]] === board[combo[2]]
+        )
+          console.log('board[combo[0]', board[combo[0]]);
+        winner = board[combo[0]];
+      });
+      console.log('checkforwin');
+      // returns tie/ winner:
+      return winner ? winner : board.includes('') ? null : 'T';
+    }
+
     setBoard(newBoard);
-    //console.log('hasUpdated', hasUpdated);
+    console.log('hasUpdated', hasUpdated);
     if (hasUpdated) {
       if (props.player === 'X') {
         props.setPlayer('O');
@@ -30,6 +60,10 @@ export function Board(props) {
     } else {
       console.log('some message to player - square is occupied');
     }
+    ergebnis = checkforWin();
+    props.setWin(ergebnis);
+
+    console.log('win', props.win);
   }
 
   return (
@@ -38,7 +72,7 @@ export function Board(props) {
         <Square
           key={index}
           fill={value}
-          click={() => handleClick(index, props.player)}
+          click={() => handleTurn(index, props.player)}
         />
       ))}
     </div>
