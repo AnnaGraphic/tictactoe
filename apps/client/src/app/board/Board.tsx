@@ -4,6 +4,34 @@ import ReactDOM from 'react-dom/client';
 import { useState } from 'react';
 import { Square } from '../square/Square';
 
+function checkforWin(board) {
+  const winCombos = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  let winner = null;
+  console.log('winner', winner);
+  winCombos.forEach(function (combo, index) {
+    if (
+      board[combo[0]] &&
+      board[combo[0]] === board[combo[1]] &&
+      board[combo[0]] === board[combo[2]]
+    ) {
+      //console.log('board[combo[0]', board[combo[0]]);
+      winner = board[combo[0]];
+    }
+  });
+  console.log('checkforwin');
+  // returns tie/ winner:
+  return winner ? winner : board.includes('') ? null : 'T';
+}
+
 export function Board(props) {
   const [board, setBoard] = useState(['', '', '', '', '', '', '', '', '']);
   let ergebnis = null;
@@ -20,35 +48,6 @@ export function Board(props) {
       return oldValue;
     });
 
-    function checkforWin() {
-      const winCombos = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-      ];
-      let winner = null;
-      console.log('winner', winner);
-      winCombos.forEach(function (combo, index) {
-        //console.log('combo', combo, 'index', index);
-        console.log('props.win, props.player', props.win, props.player);
-        if (
-          board[combo[0]] &&
-          board[combo[0]] === board[combo[1]] &&
-          board[combo[0]] === board[combo[2]]
-        )
-          console.log('board[combo[0]', board[combo[0]]);
-        winner = board[combo[0]];
-      });
-      console.log('checkforwin');
-      // returns tie/ winner:
-      return winner ? winner : board.includes('') ? null : 'T';
-    }
-
     setBoard(newBoard);
     console.log('hasUpdated', hasUpdated);
     if (hasUpdated) {
@@ -60,7 +59,7 @@ export function Board(props) {
     } else {
       console.log('some message to player - square is occupied');
     }
-    ergebnis = checkforWin();
+    ergebnis = checkforWin(newBoard);
     props.setWin(ergebnis);
 
     console.log('win', props.win);
