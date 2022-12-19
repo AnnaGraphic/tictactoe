@@ -4,6 +4,9 @@ import * as path from 'path';
 import * as cors from 'cors';
 
 const { WEBSITE } = process.env;
+
+const { insertUserXName } = require('./db');
+
 const app = express();
 // const test: Hallo = {
 //   gruss: 'hallo',
@@ -26,8 +29,22 @@ app.use((req, res, next) => {
 });
 
 // +++++++ routes +++++++
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to server!' });
+// app.get('/api', (req, res) => {
+//   res.send({ message: 'Welcome to server!' });
+// });
+
+// +++ set username for X +++
+app.post('/api/username-x', (req, res) => {
+  console.log('req.body', req.body);
+  const { username } = req.body;
+  insertUserXName(username)
+    .then((user) => {
+      res.json({ success: true });
+    })
+    .catch((err) => {
+      // uh oh
+      console.log(err);
+    });
 });
 
 // +++++++ all routes +++++++
