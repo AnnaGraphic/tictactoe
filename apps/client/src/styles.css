@@ -138,6 +138,7 @@ img.avatar {
 }
 
 .floating {
+  width: 300px;
   animation-name: floating;
   animation-duration: 4s;
   animation-iteration-count: infinite;

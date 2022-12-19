@@ -11,15 +11,6 @@ export function Character(props) {
     setAvatar(e.target.value);
   };
 
-  useEffect(() => {
-    // fetch('/api/username-x')
-    //   .then((res) => res.json())
-    //   .then((response) => {
-    //     console.log('/api/username-x response', response);
-    //     //setUsername([...response]);
-    //   });
-  }, []);
-
   return (
     <div className="character">
       <h2>Choose Your Character</h2>
@@ -38,16 +29,7 @@ export function Character(props) {
             ></input>
             {/* send to db? store in a cookie? */}
 
-            <SubmitButton
-              route="/api/usernamex"
-              payload={{ username, avatar }}
-              onSuccess={() => {
-                setUsername;
-                console.log('user x = ', username);
-              }}
-              onError={() => {}}
-              text="submit"
-            ></SubmitButton>
+
           </div>
 
           <div className="chooseAvatar">
@@ -66,7 +48,7 @@ export function Character(props) {
                 <span>
                   <img
                     className="icons"
-                    src={'/assets/avatar-cat-192x192_1.png'}
+                    src={'/assets/avatar-hulk-192x192_1.png'}
                     alt="default"
                   />
                 </span>
@@ -90,17 +72,17 @@ export function Character(props) {
                   />
                 </span>
               </label>
-              {/* <SubmitButton
-                route="/api/uavatar-x"
-                payload={{ username }}
-                onSuccess={() => {
-                  setUsername;
-                  console.log('avatar ', avatar);
-                }}
-                onError={() => {}}
-                text="submit"
-              ></SubmitButton> */}
             </form>
+                        <SubmitButton
+              route="/api/usernamex"
+              payload={{ username, avatar }}
+              onSuccess={() => {
+                setUsername;
+                console.log('user x = ', username);
+              }}
+              onError={(err) => {console.log(err)}}
+              text="submit"
+            ></SubmitButton>
           </div>
         </div>
         {/* right */}
@@ -108,7 +90,7 @@ export function Character(props) {
           <div className="avatarPic">
             <img
               className="floating"
-              src={'/assets/avatar-luck-192x192_1.png'}
+              src={`/assets/avatar-${avatar}-big.png`}
               alt="default"
             />
           </div>
