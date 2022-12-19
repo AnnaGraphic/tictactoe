@@ -1,11 +1,14 @@
 import * as express from 'express';
 import * as path from 'path';
+import * as dotenv from 'dotenv';
 //import { Hallo } from 'tictactoe-typings';
 import * as cors from 'cors';
+dotenv.config();
 
 const { WEBSITE } = process.env;
+console.log('website', WEBSITE);
 
-const { insertUserXName } = require('./db');
+const { insertUserXName } = require('./db.ts');
 
 const app = express();
 // const test: Hallo = {
@@ -14,7 +17,10 @@ const app = express();
 // console.log(test);
 
 // +++++++ middleware +++++++
-app.use(cors({ origin: WEBSITE }));
+app.use(cors({ origin: '*' }));
+
+// json parser
+app.use(express.json());
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
@@ -34,11 +40,13 @@ app.use((req, res, next) => {
 // });
 
 // +++ set username for X +++
-app.post('/api/username-x', (req, res) => {
+app.post('/api/usernamex', (req, res) => {
   console.log('req.body', req.body);
   const { username } = req.body;
+  const { avatar } = req.body;
   insertUserXName(username)
     .then((user) => {
+      console.log('user', user);
       res.json({ success: true });
     })
     .catch((err) => {
