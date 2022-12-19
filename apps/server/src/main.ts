@@ -3,32 +3,44 @@ import * as path from 'path';
 import * as dotenv from 'dotenv';
 //import { Hallo } from 'tictactoe-typings';
 import * as cors from 'cors';
+import { insertUserXName, insertUserOName } from './db';
+import * as cookieSession from 'cookie-session';
 dotenv.config();
 
-const { WEBSITE } = process.env;
-console.log('website', WEBSITE);
+const { WEBSITE, SECRET } = process.env;
 
-const { insertUserXName } = require('./db.ts');
-
+// +++++++ middleware +++++++
 const app = express();
+
+//COOKIES
+
+app.use(express.urlencoded({ extended: false }));
+// causes session-object to be stringified, base64 encoded , and written to a cookie,
+// then decode, parse and attach to req-obj
+//Tampering is prevented because of a second cookie that is auto added.
+app.use(
+  cookieSession({
+    secret: `${SECRET}`,
+    maxAge: 1000 * 60 ** 24 * 14,
+    name: 'ultimate-cookie',
+  })
+);
+
 // const test: Hallo = {
 //   gruss: 'hallo',
 // };
 // console.log(test);
 
-// +++++++ middleware +++++++
 app.use(cors({ origin: '*' }));
 
 // json parser
 app.use(express.json());
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
-
 app.use((req, res, next) => {
   console.log('---------------------');
   console.log('req.url:', req.url);
   console.log('req.method:', req.method);
-  // console.log('req.session:', req.session);
+  console.log('req.session:', req.session);
   // console.log('req.session.userId:', req.session.userId);
   console.log('---------------------');
   next();
@@ -47,6 +59,7 @@ app.post('/api/usernamex', (req, res) => {
   insertUserXName(username)
     .then((user) => {
       console.log('user', user);
+      req.session.id = user.id;
       res.json({ success: true });
     })
     .catch((err) => {
@@ -55,10 +68,6 @@ app.post('/api/usernamex', (req, res) => {
     });
 });
 
-// +++++++ all routes +++++++
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'assets', '..', 'client', 'public'));
-});
 
 const port = process.env.port || 3333;
 const server = app.listen(port, () => {
