@@ -4,8 +4,12 @@ import { SubmitButton } from '../submitButton/SubmitButton';
 import { useState, useEffect } from 'react';
 
 export function Character(props) {
-  const [username, setUsername] = useState('X');
+  const [username, setUsername] = useState('');
+  const [avatar, setAvatar] = useState('heart');
   //const [editName, setEditName] = useState(false);
+  const avatarChoice = (e) => {
+    setAvatar(e.target.value);
+  };
 
   useEffect(() => {
     // fetch('/api/username-x')
@@ -22,7 +26,10 @@ export function Character(props) {
       <div className="card">
         <div className="left">
           <div className="UserName">
-            <div className="userName">{username}</div>
+            <div className="userName">
+              {username === '' && <p>enter yor name:</p>}
+              {username && <h5>{username}</h5>}
+            </div>
             <input
               type="text"
               name="inputUserName"
@@ -32,8 +39,8 @@ export function Character(props) {
             {/* send to db? store in a cookie? */}
 
             <SubmitButton
-              route="/api/username-x"
-              payload={{ username }}
+              route="/api/usernamex"
+              payload={{ username, avatar }}
               onSuccess={() => {
                 setUsername;
                 console.log('user x = ', username);
@@ -44,30 +51,56 @@ export function Character(props) {
           </div>
 
           <div className="chooseAvatar">
-            <div className="radios">
-              <label htmlFor="hulk" className="material-icons">
+            <h5>select a player</h5>
+            <form className="radios">
+              <label htmlFor="hulk" className="icons">
                 <i></i>
                 <input
                   type="radio"
                   name="avatar"
                   id="hulk"
                   value="hulk"
-                  // checked
+                  checked={avatar === 'hulk'}
+                  onChange={avatarChoice}
                 ></input>
-                <span>hulk</span>
+                <span>
+                  <img
+                    className="icons"
+                    src={'/assets/avatar-cat-192x192_1.png'}
+                    alt="default"
+                  />
+                </span>
               </label>
 
-              <label htmlFor="heart" className="material-icons">
+              <label htmlFor="heart" className="icons">
                 <i></i>
                 <input
                   type="radio"
                   name="avatar"
                   id="heart"
                   value="heart"
+                  checked={avatar === 'heart'}
+                  onChange={avatarChoice}
                 ></input>
-                <span>heart</span>
+                <span>
+                  <img
+                    className="icons"
+                    src={'/assets/avatar-heart-192x192_1.png'}
+                    alt="default"
+                  />
+                </span>
               </label>
-            </div>
+              {/* <SubmitButton
+                route="/api/uavatar-x"
+                payload={{ username }}
+                onSuccess={() => {
+                  setUsername;
+                  console.log('avatar ', avatar);
+                }}
+                onError={() => {}}
+                text="submit"
+              ></SubmitButton> */}
+            </form>
           </div>
         </div>
         {/* right */}

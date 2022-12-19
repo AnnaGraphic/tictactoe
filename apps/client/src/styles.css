@@ -176,17 +176,33 @@ input {
   cursor: pointer;
   position: relative;
 }
-input[id='hulk'] + span {
-  background: url('/assets/avatar-cat-192x192_1.png') no-repeat left center;
-}
 
+img.icons {
+  width: 100px;
+  float: inline-start;
+  position: relative;
+}
+border img.icons:hover {
+  width: 105px;
+  transition: all 0.4s;
+}
+span {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+}
 input[type='radio'] + span {
   border-radius: 50%;
+  background: transparent;
+  background-size: contain;
+  justify-self: center;
   padding: 12px;
   transition: all 0.4s;
 }
 input[type='radio']:checked + span {
   background-color: var(--highlight);
+  transition: all 0.4s;
 }
 /* :hover? */
 
