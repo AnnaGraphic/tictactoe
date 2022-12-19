@@ -12,11 +12,13 @@
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "express": "^4.18.1",
+    "express": "^4.18.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.4.3",
     "regenerator-runtime": "0.13.7",
+    "socket.io": "^4.5.4",
+    "spiced-pg": "^1.0.4",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
