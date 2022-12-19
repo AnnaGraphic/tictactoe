@@ -17,7 +17,7 @@ export function Display(props) {
   } else {
     return (
       <div className="display">
-        <p>dings {props.win}</p>
+        <h3>{props.win} wins!</h3>
       </div>
     );
   }

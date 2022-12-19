@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 //import './board.module.css';
 import { useState } from 'react';
 import { Square } from '../square/Square';
+import { Display } from '../display/Display';
 
 function checkforWin(board) {
   const winCombos = [
@@ -16,7 +17,7 @@ function checkforWin(board) {
     [2, 4, 6],
   ];
   let winner = null;
-  console.log('winner', winner);
+  //console.log('winner', winner);
   winCombos.forEach(function (combo, index) {
     if (
       board[combo[0]] &&
@@ -35,8 +36,9 @@ function checkforWin(board) {
 export function Board(props) {
   const [board, setBoard] = useState(['', '', '', '', '', '', '', '', '']);
   let ergebnis = null;
+// useEffect fuer aktuelles game (cookie-id)
 
-  // +++ methods +++
+
   function handleTurn(i, newValue) {
     let hasUpdated = false;
     console.log('click');
@@ -66,14 +68,18 @@ export function Board(props) {
   }
 
   return (
-    <div className="board">
-      {board.map((value, index) => (
-        <Square
-          key={index}
-          fill={value}
-          click={() => handleTurn(index, props.player)}
-        />
-      ))}
+    <div className="game">
+      <Display player={props.player} win={props.win} />
+
+      <div className="board">
+        {board.map((value, index) => (
+          <Square
+            key={index}
+            fill={value}
+            click={() => handleTurn(index, props.player)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
