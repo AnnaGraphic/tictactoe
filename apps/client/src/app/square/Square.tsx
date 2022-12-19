@@ -17,7 +17,7 @@ export function Square(props) {
       <button className="square" onClick={props.click}>
         <img
           className="avatar"
-          src={'/assets/avatar-hart-192x192_1.png' || 'X'}
+          src={'/assets/avatar-heart-192x192_1.png' || 'X'}
           alt="X"
         />
       </button>
