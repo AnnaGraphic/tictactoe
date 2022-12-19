@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --main-color: #c21d51;
+  /* var(--main-color); */
+  --main-color-darker: #b41547;
+  --secondary-color: rgb(183, 189, 168);
+  /* var(--secondary-color); */
+  --highlight: rgb(202, 201, 167);
+  /* var(--highlight) */
+}
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +20,6 @@
 .app {
   height: 100vh;
   width: 100vw;
-
   background-color: rgb(183, 189, 168);
 }
 /* Navbar */
@@ -19,7 +27,7 @@
   display: flex;
   align-items: baseline;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
-  background-color: rgb(202, 201, 167);
+  background-color: var(--highlight);
 }
 .headline {
   margin: 0.45rem;
@@ -34,7 +42,7 @@ p.headline {
 /* Board */
 .game {
   /* background-color: rgb(170, 201, 213); */
-  background-color: rgb(183, 189, 168);
+  background-color: var(--secondary-color);
   width: auto;
   display: flex;
   margin: 0;
@@ -57,7 +65,7 @@ p.headline {
   align-self: end;
   width: 100px;
   height: 100px;
-  background-color: #ca256a;
+  background-color: var(--main-color);
   border: none;
   font-family: inherit;
   padding: 0;
@@ -69,7 +77,7 @@ p.headline {
   font-weight: bolder;
 }
 .square:hover {
-  background-color: #c21d62;
+  background-color: var(--main-color-darker);
   transition: 210ms all ease-in-out;
 }
 .square:active {
@@ -79,7 +87,8 @@ p.headline {
 }
 
 img.avatar {
-  max-width: 100px;
+  max-width: 92px;
+  justify-self: center;
 }
 
 /* display */
@@ -93,4 +102,192 @@ img.avatar {
   margin-bottom: 0.35rem;
   background-color: transparent;
   font-size: medium;
+}
+
+/* character */
+.character {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100vw;
+  height: 100vh;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  align-items: flex-start;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.UserName {
+  margin: 15px;
+}
+
+.floating {
+  animation-name: floating;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  margin-left: 30px;
+  margin-top: 5px;
+}
+
+@keyframes floating {
+  0% {
+    transform: translate(0, 0px);
+  }
+  50% {
+    transform: translate(0, 20px);
+  }
+  100% {
+    transform: translate(0, -0px);
+  }
+}
+
+input {
+  color: var(--main-color);
+}
+
+[type='text'] {
+  background-color: var(--highlight);
+  border-style: none;
+}
+
+[type='radio'] {
+  color: var(--main-color);
+  opacity: 0; /* hidden but tabable */
+  position: absolute;
+}
+.radios label {
+  cursor: pointer;
+  position: relative;
+}
+input[id='hulk'] + span {
+  background: url('/assets/avatar-cat-192x192_1.png') no-repeat left center;
+}
+
+input[type='radio'] + span {
+  border-radius: 50%;
+  padding: 12px;
+  transition: all 0.4s;
+}
+input[type='radio']:checked + span {
+  background-color: var(--highlight);
+}
+/* :hover? */
+
+/* wall of fame */
+
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+li {
+  border-radius: 3px;
+  padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.table-header {
+  background-color: var(--main-color);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.table-row {
+  background-color: var(--secondary-color);
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+.col-1 {
+  flex-basis: 10%;
+}
+.col-2 {
+  flex-basis: 40%;
+}
+.col-3 {
+  flex-basis: 25%;
+}
+.col-4 {
+  flex-basis: 25%;
+}
+
+/* responsive */
+@media only screen and (max-width: 600px) {
+  /* board */
+  .game {
+    background-color: var(--secondary-color);
+    width: auto;
+  }
+
+  .board {
+    display: grid;
+    width: fit-content;
+    gap: 0.25rem;
+  }
+
+  .square {
+    justify-self: center;
+    align-self: end;
+    width: 80px;
+    height: 80px;
+    font-size: large;
+    font-weight: bolder;
+  }
+  img.avatar {
+    max-width: 75px;
+  }
+  /* character */
+  .character {
+    /* funktioniert nicht */
+    flex-wrap: wrap;
+  }
+  /* wall of fame */
+  .table-header {
+    display: none;
+  }
+  .table-row {
+    background-color: var(--highlight);
+  }
+  li {
+    display: block;
+  }
+  .col {
+    flex-basis: 100%;
+  }
+  .col {
+    display: flex;
+    padding: 10px 0;
+  }
+  col:before {
+    color: #6c7a89;
+    padding-right: 10px;
+    content: attr(data-label);
+    flex-basis: 50%;
+    text-align: right;
+  }
 }
