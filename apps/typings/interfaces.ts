@@ -11,3 +11,12 @@ export interface Player<T> {
 // Turn ?
 // Board ?
 // Win ?
+export interface Game {
+  id: number;
+  user_x: string;
+  user_x_avatar: string;
+  user_o: string;
+  user_o_avatar: string;
+  win: string;
+  created_at: Date;
+}
