@@ -3,43 +3,41 @@ const database = 'ultimatetictactoe';
 const spicedPg = require('spiced-pg');
 const db = spicedPg(process.env.DATABASE_URL);
 
-function insertUserXName(name_x) {
+export function insertUserXName(name_x, avatar) {
   return db
     .query(
-      `INSERT INTO games (user_x) VALUES($1)
+      `INSERT INTO games (user_x, user_x_avatar) VALUES($1, $2)
         RETURNING*`,
-      [name_x]
+      [name_x, avatar]
     )
-    .then((result) => {
-      console.log(
-        'result insert user x',
-        result,
-        'result.rows[0]',
-        result.rows[0]
-      );
-      return result.rows[0];
+    .then((response) => {
+      // console.log(
+      //   'result insert user x',
+      //   response,
+      //   'result.rows[0]',
+      //   response.rows[0]
+      // );
+      return response.rows[0];
     })
     .catch((err) => console.log(err));
 }
 
-function insertUserOName(name_o, id) {
+export function insertUserOName(name_o, avatar, id) {
   return db
     .query(
-      `UPDATE games SET ser_o=$1 WHERE id=$2
+      `UPDATE games 
+      SET user_o=$1, user_o_avatar=$2 WHERE id=$3
       RETURNING*`,
-      [name_o, id]
+      [name_o, avatar, id]
     )
     .then((result) => {
       console.log(
-        'result insert user x',
+        'result insert user o',
         result,
         'result.rows[0]',
         result.rows[0]
       );
       return result.rows[0];
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log("error in user O db", err));
 }
-module.exports = {
-  insertUserXName,
-};
