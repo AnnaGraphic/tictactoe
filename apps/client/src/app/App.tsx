@@ -1,14 +1,22 @@
 import styles from './app.module.css';
+import { Component } from "react";
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Board } from './board/Board';
 import { Display } from './display/Display';
 import { WallOfFame } from './wallOfFame/WallOfFame';
 import { Character } from './character/Character';
+import { CharacterO } from './character/CharacterO';
 
 export function App() {
   const [player, setPlayer] = useState('X');
   const [win, setWin] = useState(null);
+  const [game, setGame] = useState({})
+
+  function updateGame(game) {
+        setGame(game)
+        console.log("updateGame", game);
+    }
 
   return (
     <>
@@ -16,7 +24,7 @@ export function App() {
         <BrowserRouter>
           <div className="navbar">
             <div className="headline">
-              <p>just another </p> <h1 className="headline">Tic Tac Toe</h1>
+              <p className='bangers'>ultimate</p> <h1 className="headline">Tic Tac Toe</h1>
             </div>
           </div>
 
@@ -30,6 +38,7 @@ export function App() {
                   setPlayer={setPlayer}
                   setWin={setWin}
                   win={win}
+                  game={game}
                 />
               }
             ></Route>
@@ -38,7 +47,15 @@ export function App() {
               path="/wall-of-fame"
               element={<WallOfFame></WallOfFame>}
             ></Route>
-            <Route path="/profile" element={<Character></Character>}></Route>
+            <Route path="/profile" element={<Character
+                  game={game}
+                  setGame={setGame}
+                  updateGame={updateGame}
+            ></Character>}></Route>
+            <Route path="/profileo" element={<CharacterO
+                  game={game}
+                  setGame={setGame}
+                  updateGame={updateGame}></CharacterO>}></Route>
           </Routes>
           {/* END: routes */}
         </BrowserRouter>

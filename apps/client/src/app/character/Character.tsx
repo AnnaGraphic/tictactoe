@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { SubmitButton } from '../submitButton/SubmitButton';
-import { useState, useEffect } from 'react';
+import { SubmitButton } from '../button/SubmitButton';
+import { useState, useEffect} from 'react';
 
 export function Character(props) {
   const [username, setUsername] = useState('');
-  const [avatar, setAvatar] = useState('heart');
+  const [avatar, setAvatar] = useState('anna');
   //const [editName, setEditName] = useState(false);
   const avatarChoice = (e) => {
     setAvatar(e.target.value);
   };
 
+
+ console.log('game in X ', props.game);
   return (
     <div className="character">
       <h2>Choose Your Character</h2>
@@ -18,8 +20,8 @@ export function Character(props) {
         <div className="left">
           <div className="UserName">
             <div className="userName">
-              {username === '' && <p>enter yor name:</p>}
-              {username && <h5>{username}</h5>}
+              {!props.game.user_x && <p>enter yor name:</p>}
+              {username && <h5>{props.game.user_x}</h5>}
             </div>
             <input
               type="text"
@@ -27,9 +29,6 @@ export function Character(props) {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="type your name"
             ></input>
-            {/* send to db? store in a cookie? */}
-
-
           </div>
 
           <div className="chooseAvatar">
@@ -49,36 +48,37 @@ export function Character(props) {
                   <img
                     className="icons"
                     src={'/assets/avatar-hulk-192x192_1.png'}
-                    alt="default"
+                    alt="hulk"
                   />
                 </span>
               </label>
 
-              <label htmlFor="heart" className="icons">
+              <label htmlFor="anna" className="icons">
                 <i></i>
                 <input
                   type="radio"
                   name="avatar"
-                  id="heart"
-                  value="heart"
-                  checked={avatar === 'heart'}
+                  id="anna"
+                  value="anna"
+                  checked={avatar === 'anna'}
                   onChange={avatarChoice}
                 ></input>
                 <span>
                   <img
                     className="icons"
-                    src={'/assets/avatar-heart-192x192_1.png'}
-                    alt="default"
+                    src={'/assets/avatar-anna-192x192_1.png'}
+                    alt="anna"
                   />
                 </span>
               </label>
             </form>
-                        <SubmitButton
-              route="/api/usernamex"
+             <SubmitButton
+              route="/api/userx"
               payload={{ username, avatar }}
               onSuccess={() => {
-                setUsername;
-                console.log('user x = ', username);
+                props.updateGame({...props.game, user_x: username,  user_x_avatar: avatar})
+                // setUsername;
+                location.replace("/profileo")
               }}
               onError={(err) => {console.log(err)}}
               text="submit"
@@ -91,7 +91,7 @@ export function Character(props) {
             <img
               className="floating"
               src={`/assets/avatar-${avatar}-big.png`}
-              alt="default"
+              alt="selected avatar"
             />
           </div>
         </div>
