@@ -43,14 +43,20 @@ p.bangers{
 }
 
 /* Board */
+.aroundthegame {
+  display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
 .game {
   /* background-color: rgb(170, 201, 213); */
-  background-color: var(--secondary-color);
+  background-color: transparent;
   width: auto;
   display: flex;
   margin: 0;
   padding: 1rem;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
@@ -256,10 +262,35 @@ li {
   flex-basis: 25%;
 }
 
+/* button */
+button.start {
+position: absolute;
+display: inline-block;
+position: relative;
+background-color: var(--main-color);
+font-size: 1.2rem;
+border-radius: 1000px;
+border-width: 0;
+padding: 0.45rem;
+ box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+text-align: center;
+transition:  100ms;
+}
+button.start:hover {
+background-color: var(--main-color-darker);
+}
+button.start:active {
+  transition: 100ms all ease-in-out;
+padding: 0.40rem;
+}
+
+
+
 /* responsive */
 @media only screen and (max-width: 600px) {
   /* board */
   .game {
+
     background-color: var(--secondary-color);
     width: auto;
   }
@@ -281,11 +312,16 @@ li {
   img.avatar {
     max-width: 75px;
   }
+
+
   /* character */
   .character {
     /* funktioniert nicht */
     flex-wrap: wrap;
   }
+
+
+
   /* wall of fame */
   .table-header {
     display: none;
