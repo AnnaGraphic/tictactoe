@@ -5,16 +5,21 @@ import * as dotenv from 'dotenv';
 import * as cors from 'cors';
 import { insertUserXName, insertUserOName } from './db';
 import * as cookieSession from 'cookie-session';
-dotenv.config();
-
-const { WEBSITE, SECRET } = process.env;
-
-// +++++++ middleware +++++++
+// import { SessionData, } from 'express-session';
 const app = express();
+dotenv.config();
+const { WEBSITE, SECRET } = process.env;
+declare module 'express-session' {
+    interface SessionData {
+        gameid: number;
+    }
+}
+// +++++++ middleware +++++++
 
+app.use(cors({ origin: '*' }));
 //COOKIES
-
 app.use(express.urlencoded({ extended: false }));
+// import session from 'express-session';
 // causes session-object to be stringified, base64 encoded , and written to a cookie,
 // then decode, parse and attach to req-obj
 //Tampering is prevented because of a second cookie that is auto added.
@@ -25,14 +30,6 @@ app.use(
     name: 'ultimate-cookie',
   })
 );
-
-// const test: Hallo = {
-//   gruss: 'hallo',
-// };
-// console.log(test);
-
-app.use(cors({ origin: '*' }));
-
 // json parser
 app.use(express.json());
 
@@ -47,19 +44,38 @@ app.use((req, res, next) => {
 });
 
 // +++++++ routes +++++++
-// app.get('/api', (req, res) => {
-//   res.send({ message: 'Welcome to server!' });
-// });
 
-// +++ set username for X +++
-app.post('/api/usernamex', (req, res) => {
+// +++ set userstuff for X +++
+app.post('/api/userx', (req, res) => {
   console.log('req.body', req.body);
+   console.log("req.session", req.session)
   const { username } = req.body;
   const { avatar } = req.body;
-  insertUserXName(username)
-    .then((user) => {
-      console.log('user', user);
-      req.session.id = user.id;
+  insertUserXName(username, avatar)
+    .then((game) => {
+      console.log('game', game);
+      req.session.gameid = game.id;
+      //console.log("X req.session", req.session)
+      res.json({ success: true });
+    })
+    .catch((err) => {
+      // uh oh
+      console.log(err);
+    });
+});
+
+// +++ set userstuff for O ) +++
+app.post('/api/usero', (req, res) => {
+  console.log('req.body', req.body);
+   console.log("req.session", req.session)
+  const { username } = req.body;
+  const { avatar } = req.body;
+  const { user_x } = req.body;
+  //hardcoded cookie
+  insertUserOName(username, avatar, user_x)
+    .then((game) => {
+      // console.log('game', game);
+      console.log("req.session", req.session)
       res.json({ success: true });
     })
     .catch((err) => {
