@@ -29,14 +29,17 @@
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
   background-color: var(--highlight);
 }
+
 .headline {
   margin: 0.45rem;
 }
 h1.headline {
+  font-size: x-large;
   margin: 0;
 }
-p.headline {
-  font-weight: 300;
+p.bangers{
+  font-family: Bangers;
+  font-size: xx-large;
 }
 
 /* Board */
