@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { SubmitButton } from '../button/SubmitButton';
 import { useState, useEffect} from 'react';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export function Character(props) {
   const [username, setUsername] = useState('');
   const [avatar, setAvatar] = useState('anna');
+    const location = useNavigate()
   //const [editName, setEditName] = useState(false);
   const avatarChoice = (e) => {
     setAvatar(e.target.value);
@@ -13,6 +16,7 @@ export function Character(props) {
 
 
  console.log('game in X ', props.game);
+
   return (
     <div className="character">
       <h2>Choose Your Character</h2>
@@ -80,7 +84,7 @@ export function Character(props) {
                 props.updateGame({...props.game, user_x: username,  user_x_avatar: avatar})
                 // setUsername;
                 console.log("success")
-                location.replace("/profileo")
+                location(props.link)
               }}
               onError={(err) => {console.log(err)}}
               text="submit"

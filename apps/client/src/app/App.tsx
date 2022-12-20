@@ -49,11 +49,12 @@ export function App() {
             ></Route>
             <Route path="/profile" element={<Character
                   game={game}
-          
                   updateGame={updateGame}
+                  link="/profileo"
             ></Character>}></Route>
             <Route path="/profileo" element={<CharacterO
                   game={game}
+                  link="/game"
                   updateGame={updateGame}></CharacterO>}></Route>
           </Routes>
           {/* END: routes */}

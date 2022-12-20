@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { SubmitButton } from '../button/SubmitButton';
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export function CharacterO(props) {
   const [username, setUsername] = useState('');
-  const [avatar, setAvatar] = useState('hulk');
+  const [avatar, setAvatar] = useState('hulk');    
+  const location = useNavigate()
+
   const user_x = props.game.user_x;
   const avatarChoice = (e) => {
     setAvatar(e.target.value);
@@ -75,15 +78,16 @@ export function CharacterO(props) {
               </label>
             </form>
             <SubmitButton
-              route="/api/user0"
+              route="/api/usero"
               payload={{ username, avatar, user_x }}
               onSuccess={() => {
                 props.updateGame({...props.game, user_o: username,  user_o_avatar: avatar})
                 console.log('game O', props.game);
-                location.replace("/game")
+                console.log(props.link)
+                location(props.link)
               }}
               onError={(err) => {console.log(err);
-                     location.replace("/game")}}
+                    }}
               text="submit"
             ></SubmitButton>
           </div>
