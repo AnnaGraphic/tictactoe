@@ -3,17 +3,17 @@ import * as path from 'path';
 import * as dotenv from 'dotenv';
 //import { Hallo } from 'tictactoe-typings';
 import * as cors from 'cors';
-import { insertUserXName, insertUserOName } from './db';
-import * as cookieSession from 'cookie-session';
+import { insertUserXName, insertUserOName, getGames } from './db';
+//import cookieSession from "cookie-session";
 // import { SessionData, } from 'express-session';
 const app = express();
 dotenv.config();
 const { WEBSITE, SECRET } = process.env;
-declare module 'express-session' {
-    interface SessionData {
-        gameid: number;
-    }
-}
+// declare module 'express-session' {
+//     interface SessionData {
+//         gameid: number;
+//     }
+// }
 // +++++++ middleware +++++++
 
 app.use(cors({ origin: '*' }));
@@ -23,13 +23,13 @@ app.use(express.urlencoded({ extended: false }));
 // causes session-object to be stringified, base64 encoded , and written to a cookie,
 // then decode, parse and attach to req-obj
 //Tampering is prevented because of a second cookie that is auto added.
-app.use(
-  cookieSession({
-    secret: `${SECRET}`,
-    maxAge: 1000 * 60 ** 24 * 14,
-    name: 'ultimate-cookie',
-  })
-);
+// app.use(
+//   cookieSession({
+//     secret: `${SECRET}`,
+//     maxAge: 1000 * 60 ** 24 * 14,
+//     name: 'ultimate-cookie',
+//   })
+// );
 // json parser
 app.use(express.json());
 
@@ -54,7 +54,7 @@ app.post('/api/userx', (req, res) => {
   insertUserXName(username, avatar)
     .then((game) => {
       console.log('game', game);
-      req.session.gameid = game.id;
+      //req.session.gameid = game.id;
       //console.log("X req.session", req.session)
       res.json({ success: true });
     })
@@ -64,7 +64,7 @@ app.post('/api/userx', (req, res) => {
     });
 });
 
-// +++ set userstuff for O ) +++
+// +++ set userstuff for O +++
 app.post('/api/usero', (req, res) => {
   console.log('req.body', req.body);
    console.log("req.session", req.session)
@@ -75,7 +75,7 @@ app.post('/api/usero', (req, res) => {
   insertUserOName(username, avatar, user_x)
     .then((game) => {
       // console.log('game', game);
-      console.log("req.session", req.session)
+      console.log("req.session", req.session);
       res.json({ success: true });
     })
     .catch((err) => {
@@ -84,6 +84,17 @@ app.post('/api/usero', (req, res) => {
     });
 });
 
+// +++ get games ) +++
+app.get('/api/getgames', (req, res) => {
+  console.log("getgames", req.body);
+getGames().then((games) => {
+  console.log("games ", games);
+res.json((games))
+}).catch((err) => {
+      // uh oh
+      console.log(err);
+    });
+})
 
 const port = process.env.port || 3333;
 const server = app.listen(port, () => {
