@@ -80,7 +80,6 @@ export function CharacterO(props) {
               onSuccess={() => {
                 props.updateGame({...props.game, user_o: username,  user_o_avatar: avatar})
                 console.log('game O', props.game);
-                setUsername;
                 location.replace("/game")
               }}
               onError={(err) => {console.log(err);

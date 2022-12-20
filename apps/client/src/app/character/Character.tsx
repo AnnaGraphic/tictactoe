@@ -72,12 +72,14 @@ export function Character(props) {
                 </span>
               </label>
             </form>
+            
              <SubmitButton
               route="/api/userx"
               payload={{ username, avatar }}
               onSuccess={() => {
                 props.updateGame({...props.game, user_x: username,  user_x_avatar: avatar})
                 // setUsername;
+                console.log("success")
                 location.replace("/profileo")
               }}
               onError={(err) => {console.log(err)}}
