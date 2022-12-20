@@ -6,20 +6,28 @@ export function Display(props) {
   if (props.player === 'X' && props.win === null) {
     return (
       <div className="display">
-        <p>{props.player}'s turn</p>
+        <p>{props.game.user_x}'s turn</p>
       </div>
     );
   } else if (props.player === 'O' && props.win === null) {
     return (
       <div className="display">
-        <p>{props.player}'s turn</p>
+        <p>{props.game.user_o}'s turn</p>
       </div>
     );
-  } else {
+  } else if (props.win === 'X') {
     return (
       <div className="display">
-        <h3>{props.win} wins!</h3>
+        <h3>{props.game.user_x} wins!</h3>
       </div>
     );
-  }
+   } else  if (props.win === 'O') {
+    return (
+      <div className="display">
+        <h3>{props.game.user_o} wins!</h3>
+      </div> )
+  } else {return (
+      <div className="display">
+        <h3>It's a tie!</h3>
+      </div>)}
 }
