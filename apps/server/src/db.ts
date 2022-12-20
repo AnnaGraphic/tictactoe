@@ -41,3 +41,13 @@ export function insertUserOName(name_o, avatar, id) {
     })
     .catch((err) => console.log("error in user O db", err));
 }
+
+export function getGames() {
+  return db.
+  query(`SELECT * FROM games WHERE win <> ''`
+  ).then((result) => {
+    console.log('result.rows in getGames ', result.rows)
+      return result.rows;
+    })
+    .catch((err) => console.log("error in in getGames", err));
+}
