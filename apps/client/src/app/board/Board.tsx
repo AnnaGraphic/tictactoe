@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom/client';
 import { useState, useEffect } from 'react';
 import { Square } from '../square/Square';
 import { Display } from '../display/Display';
+import { DisplayPlayerX } from '../display/DisplaPlayerX';
+import { DisplayPlayerO } from '../display/DisplaPlayerO';
+import { StartButton } from '../button/StartButton';
 
 function checkforWin(board) {
 console.log("board.", board);
@@ -35,10 +38,17 @@ console.log("board.", board);
   return winner ? winner : board.includes('') ? null : 'No one';
 }
 
+
+
 export function Board(props) {
   const [board, setBoard] = useState(['', '', '', '', '', '', '', '', '']);
   let ergebnis = null;
 // useEffect fuer aktuelles game (cookie-id) ?
+
+const handleClick = () => {
+  console.log('click', board)
+setBoard(['', '', '', '', '', '', '', '', '']);
+}
 
   function handleTurn(i, newValue) {
     let hasUpdated = false;
@@ -69,21 +79,35 @@ export function Board(props) {
   }
 
   return (
+     <div className='aroundthegame'>
     <div className="game">
-      <Display player={props.player} 
+      <DisplayPlayerX
+      game={props.game}
+      ></DisplayPlayerX>
+        <div>
+      
+        <Display player={props.player} 
       win={props.win}
-       game={props.game} />
-
-      <div className="board">
+      game={props.game} 
+      />
+    <div className="board">
         {board.map((value, index) => (
           <Square
             key={index}
             fill={value}
-             game={props.game}
+            game={props.game}
             click={() => handleTurn(index, props.player)}
           />
         ))}
+        </div>
       </div>
+      <DisplayPlayerO
+      game={props.game}
+      ></DisplayPlayerO>
     </div>
+<StartButton
+handleClick={handleClick}
+text="reset"></StartButton>
+   </div>
   );
 }
