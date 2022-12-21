@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import { SubmitButton,  } from '../button/SubmitButton';
+import { SubmitButton,  } from '../button/SubmitButton';
 import { StartButton } from '../button/StartButton';
 import { useState, useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
@@ -13,13 +13,8 @@ export function Character(props) {
   //const [editName, setEditName] = useState(false);
   const avatarChoice = (e) => {
     setAvatar(e.target.value);
+    console.log("avatar still anna?", avatar)
   };
-
-  const handleClick = () => {
-    location(props.link)
-  }
-
-//  console.log('game in X ', props.game);
 
   return (
     <div className="character">
@@ -119,20 +114,18 @@ export function Character(props) {
 
             </form>
              <div className="submitbuttoncharacterform">
-  <StartButton
-handleClick={handleClick}
-text="submit"></StartButton>
-             {/* <SubmitButton
+             <SubmitButton
               route="/api/userx"
               payload={{ username, avatar }}
-              onSuccess={() => {
-                props.updateGame({...props.game, user_x: username,  user_x_avatar: avatar})
+              onSuccess={(response) => {
+                props.updateGame({...props.game, user_x: username,  user_x_avatar: avatar, game_id: response.id})
+                console.log("props.game", props.game)
                 // setUsername;
                 location(props.link)
               }}
               onError={(err) => {console.log(err)}}
               text="submit"
-            ></SubmitButton> */}
+            ></SubmitButton>
             </div>
           </div>
         </div>

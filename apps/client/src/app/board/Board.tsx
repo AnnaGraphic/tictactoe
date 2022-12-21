@@ -45,6 +45,7 @@ export function Board(props) {
   let ergebnis = null;
 // useEffect fuer aktuelles game (cookie-id) ?
 
+
 const handleClick = () => {
   console.log('click', board)
 setBoard(['', '', '', '', '', '', '', '', '']);
@@ -75,7 +76,7 @@ setBoard(['', '', '', '', '', '', '', '', '']);
     ergebnis = checkforWin(newBoard);
     props.setWin(ergebnis);
 
-    console.log('game in board', props.game);
+   // console.log('game in board', props.game);
   }
 
   return (

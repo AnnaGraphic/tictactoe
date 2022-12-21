@@ -8,14 +8,18 @@ export function CharacterO(props) {
   const [username, setUsername] = useState('');
   const [avatar, setAvatar] = useState('hulk');    
   const location = useNavigate()
+  // const user_x = props.game.user_x;
+  // const user_x_avatar = props.game.user_x_avatar;
+  const game_id = props.game.game_id
+  console.log("gameid", game_id)
 
-  const user_x = props.game.user_x;
-  const user_x_avatar = props.game.user_x_avatar;
   const avatarChoice = (e) => {
     setAvatar(e.target.value);
+    console.log("avatar O", avatar)
   };
   
-//  console.log('game in O ', props.game);
+console.log('game in O ', props.game);
+
   return (
     <div className="character">
       <h2>Choose Your Character</h2>
@@ -119,11 +123,11 @@ export function CharacterO(props) {
             </form>
             <div className="submitbuttoncharacterform">
             <SubmitButton
-              route="/api/setGame"
-              payload={{ user_x, user_x_avatar, username, avatar, }}
+              route="/api/usero"
+              payload={{ username, avatar, game_id }}
               onSuccess={() => {
                 props.updateGame({...props.game, user_o: username,  user_o_avatar: avatar})
-                // console.log('game O', props.game);
+                console.log('game O', props.game);
                 // console.log(props.link)
                 location(props.link)
               }}
