@@ -9,7 +9,7 @@ import { DisplayPlayerO } from '../display/DisplaPlayerO';
 import { StartButton } from '../button/StartButton';
 
 function checkforWin(board) {
-console.log("board.", board);
+//onsole.log("board.", board);
 
   const winCombos = [
     [0, 1, 2],
@@ -41,14 +41,37 @@ console.log("board.", board);
 
 
 export function Board(props) {
+  console.log("props in board", props)
   const [board, setBoard] = useState(['', '', '', '', '', '', '', '', '']);
-  let ergebnis = null;
+  //let ergebnis = null;
+  //const [thisGame, setThisGame] = useState({})
+  const [win, setWin] = useState(null);
+   console.log("win", win)
+ 
 // useEffect fuer aktuelles game (cookie-id) ?
-
+//  useEffect(() => {
+//         fetch(`http://localhost:3333/api/getgame/${props.game.game_id}`)
+//             .then((res) => res.json())
+//             .then((response) => {
+//                 if (response) {
+//                     console.log("response in board ", response);
+//                     //"success true"
+//                     //eintraege setzen
+//              setThisGame(response)
+//              console.log("thisGamet", thisGame)
+//                 } else {
+//                     console.log("success false")
+//                 }
+//             }).catch((err) => {console.log(err)})
+//     }, []);
 
 const handleClick = () => {
-  console.log('click', board)
+ // console.log('click', board)
 setBoard(['', '', '', '', '', '', '', '', '']);
+}
+const handleRevenge = () => {
+ // console.log('click', board)
+location.replace("/")
 }
 
   function handleTurn(i, newValue) {
@@ -61,7 +84,6 @@ setBoard(['', '', '', '', '', '', '', '', '']);
       }
       return oldValue;
     });
-
     setBoard(newBoard);
    // console.log('hasUpdated', hasUpdated);
     if (hasUpdated) {
@@ -73,9 +95,8 @@ setBoard(['', '', '', '', '', '', '', '', '']);
     } else {
       console.log('some message to player - square is occupied');
     }
-    ergebnis = checkforWin(newBoard);
-    props.setWin(ergebnis);
-
+    setWin(checkforWin(newBoard))
+    ///
    // console.log('game in board', props.game);
   }
 
@@ -88,7 +109,7 @@ setBoard(['', '', '', '', '', '', '', '', '']);
         <div>
       
         <Display player={props.player} 
-      win={props.win}
+      win={win}
       game={props.game} 
       />
     <div className="board">
@@ -98,6 +119,7 @@ setBoard(['', '', '', '', '', '', '', '', '']);
             fill={value}
             game={props.game}
             click={() => handleTurn(index, props.player)}
+        
           />
         ))}
         </div>
@@ -106,9 +128,17 @@ setBoard(['', '', '', '', '', '', '', '', '']);
       game={props.game}
       ></DisplayPlayerO>
     </div>
-<StartButton
+     {!win && (
+                    <StartButton
 handleClick={handleClick}
 text="reset"></StartButton>
+                )}
+                     {win && (
+                    <StartButton
+handleClick={handleRevenge}
+text="revenge"></StartButton>
+                )}
+
    </div>
   );
 }
