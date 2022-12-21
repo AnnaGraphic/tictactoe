@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { SubmitButton } from '../button/SubmitButton';
+// import { SubmitButton,  } from '../button/SubmitButton';
+import { StartButton } from '../button/StartButton';
 import { useState, useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
@@ -8,14 +9,17 @@ import { useNavigate } from "react-router-dom";
 export function Character(props) {
   const [username, setUsername] = useState('');
   const [avatar, setAvatar] = useState('anna');
-    const location = useNavigate()
+  const location = useNavigate()
   //const [editName, setEditName] = useState(false);
   const avatarChoice = (e) => {
     setAvatar(e.target.value);
   };
 
+  const handleClick = () => {
+    location(props.link)
+  }
 
- console.log('game in X ', props.game);
+//  console.log('game in X ', props.game);
 
   return (
     <div className="character">
@@ -75,20 +79,61 @@ export function Character(props) {
                   />
                 </span>
               </label>
+
+<label htmlFor="kuma" className="icons">
+                <i></i>
+                <input
+                  type="radio"
+                  name="avatar"
+                  id="kuma"
+                  value="kuma"
+                  checked={avatar === 'kuma'}
+                  onChange={avatarChoice}
+                ></input>
+                <span>
+                  <img
+                    className="icons"
+                    src={'/assets/avatar-kuma-192x192_1.png'}
+                    alt="default"
+                  />
+                </span>
+              </label>
+              <label htmlFor="cyclops" className="icons">
+                <i></i>
+                <input
+                  type="radio"
+                  name="avatar"
+                  id="cyclops"
+                  value="cyclops"
+                  checked={avatar === 'cyclops'}
+                  onChange={avatarChoice}
+                ></input>
+                <span>
+                  <img
+                    className="icons"
+                    src={'/assets/avatar-cyclops-192x192_1.png'}
+                    alt="default"
+                  />
+                </span>
+              </label>
+
             </form>
-            
-             <SubmitButton
+             <div className="submitbuttoncharacterform">
+  <StartButton
+handleClick={handleClick}
+text="submit"></StartButton>
+             {/* <SubmitButton
               route="/api/userx"
               payload={{ username, avatar }}
               onSuccess={() => {
                 props.updateGame({...props.game, user_x: username,  user_x_avatar: avatar})
                 // setUsername;
-                console.log("success")
                 location(props.link)
               }}
               onError={(err) => {console.log(err)}}
               text="submit"
-            ></SubmitButton>
+            ></SubmitButton> */}
+            </div>
           </div>
         </div>
         {/* right */}

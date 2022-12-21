@@ -10,11 +10,12 @@ export function CharacterO(props) {
   const location = useNavigate()
 
   const user_x = props.game.user_x;
+  const user_x_avatar = props.game.user_x_avatar;
   const avatarChoice = (e) => {
     setAvatar(e.target.value);
   };
   
- console.log('game in O ', props.game);
+//  console.log('game in O ', props.game);
   return (
     <div className="character">
       <h2>Choose Your Character</h2>
@@ -76,20 +77,61 @@ export function CharacterO(props) {
                   />
                 </span>
               </label>
+
+              <label htmlFor="kuma" className="icons">
+                <i></i>
+                <input
+                  type="radio"
+                  name="avatar"
+                  id="kuma"
+                  value="kuma"
+                  checked={avatar === 'kuma'}
+                  onChange={avatarChoice}
+                ></input>
+                <span>
+                  <img
+                    className="icons"
+                    src={'/assets/avatar-kuma-192x192_1.png'}
+                    alt="default"
+                  />
+                </span>
+              </label>
+
+ <label htmlFor="cyclops" className="icons">
+                <i></i>
+                <input
+                  type="radio"
+                  name="avatar"
+                  id="cyclops"
+                  value="cyclops"
+                  checked={avatar === 'cyclops'}
+                  onChange={avatarChoice}
+                ></input>
+                <span>
+                  <img
+                    className="icons"
+                    src={'/assets/avatar-cyclops-192x192_1.png'}
+                    alt="default"
+                  />
+                </span>
+              </label>
+
             </form>
+            <div className="submitbuttoncharacterform">
             <SubmitButton
-              route="/api/usero"
-              payload={{ username, avatar, user_x }}
+              route="/api/setGame"
+              payload={{ user_x, user_x_avatar, username, avatar, }}
               onSuccess={() => {
                 props.updateGame({...props.game, user_o: username,  user_o_avatar: avatar})
-                console.log('game O', props.game);
-                console.log(props.link)
+                // console.log('game O', props.game);
+                // console.log(props.link)
                 location(props.link)
               }}
               onError={(err) => {console.log(err);
                     }}
               text="submit"
             ></SubmitButton>
+            </div>
           </div>
         </div>
         {/* right */}
