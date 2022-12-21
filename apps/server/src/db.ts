@@ -41,13 +41,20 @@ export function insertUserXName(name_x, avatar) {
     .catch((err) => console.log(err));
 }
 
-export function insertUserOName(name_o, avatar, id) {
+export function insertUserO(user_o, user_o_avatar, id) {
+  console.log("user_o, user_o_avatar, id", user_o, user_o_avatar, id)
   return db
+  
     .query(
-      `UPDATE games 
-      SET user_o=$1, user_o_avatar=$2 WHERE id=$3
-      RETURNING*`,
-      [name_o, avatar, id]
+      // `UPDATE games 
+      // SET user_o=$1, user_o_avatar=$2 WHERE id=$3
+      // RETURNING*`,
+` INSERT INTO games(user_o, user_o_avatar, id) 
+    VALUES ($1, $2, $3) 
+    ON CONFLICT (id) 
+    DO UPDATE SET user_o=$1, user_o_avatar=$2
+    RETURNING *`,
+      [user_o, user_o_avatar, id]
     )
     .then((result) => {
       console.log(
