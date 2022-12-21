@@ -42,7 +42,7 @@ export function insertUserXName(name_x, avatar) {
 }
 
 export function insertUserO(user_o, user_o_avatar, id) {
-  console.log("user_o, user_o_avatar, id", user_o, user_o_avatar, id)
+  //console.log("user_o, user_o_avatar, id", user_o, user_o_avatar, id)
   return db
   
     .query(
@@ -57,12 +57,12 @@ export function insertUserO(user_o, user_o_avatar, id) {
       [user_o, user_o_avatar, id]
     )
     .then((result) => {
-      console.log(
-        'result insert user o',
-        result,
-        'result.rows[0]',
-        result.rows[0]
-      );
+      // console.log(
+      //   'result insert user o',
+      //   result,
+      //   'result.rows[0]',
+      //   result.rows[0]
+      // );
       return result.rows[0];
     })
     .catch((err) => console.log("error in user O db", err));
@@ -72,11 +72,24 @@ export function getGames() {
   return db.
   query(`SELECT * FROM games WHERE win <> ''`
   ).then((result) => {
-    console.log('result.rows in getGames ', result.rows)
+    //console.log('result.rows in getGames ', result.rows)
       return result.rows;
     })
     .catch((err) => console.log("error in in getGames", err));
 }
+
+export function getGame(id) {
+ // console.log("id", id)
+  return db.
+  query(`SELECT * FROM games WHERE id=$1`,
+  [id]
+  ).then((result) => {
+    console.log('result.rows in getGame ', result.rows)
+      return result.rows[0];
+    })
+    .catch((err) => console.log("error in in getGames", err));
+}
+
 
 export function setWin(win) {
   return db.query( `UPDATE games 
