@@ -3,6 +3,25 @@ const database = 'ultimatetictactoe';
 const spicedPg = require('spiced-pg');
 const db = spicedPg(process.env.DATABASE_URL);
 
+export function setGame(user_x, user_x_avatar, user_o, user_o_avatar) {
+  return db
+    .query(
+      `INSERT INTO games (user_x, user_x_avatar, user_o, user_o_avatar) VALUES($1, $2, $3, $4)
+        RETURNING*`,
+      [user_x, user_x_avatar, user_o, user_o_avatar]
+    )
+    .then((response) => {
+      console.log(
+        'result set game',
+        response,
+        'result.rows[0]',
+        response.rows[0]
+      );
+      return response.rows[0];
+    })
+    .catch((err) => console.log(err));
+}
+
 export function insertUserXName(name_x, avatar) {
   return db
     .query(
@@ -50,4 +69,11 @@ export function getGames() {
       return result.rows;
     })
     .catch((err) => console.log("error in in getGames", err));
+}
+
+export function setWin(win) {
+  return db.query( `UPDATE games 
+      SET win=$1
+      RETURNING*`,
+      [win])
 }
