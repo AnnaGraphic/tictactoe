@@ -7,10 +7,11 @@ import { Display } from './display/Display';
 import { WallOfFame } from './wallOfFame/WallOfFame';
 import { Character } from './character/Character';
 import { CharacterO } from './character/CharacterO';
+import { StartScreen } from './startScreen/StartScreen'
 
 export function App() {
   const [player, setPlayer] = useState('X');
-  const [win, setWin] = useState(null);
+  
   const [game, setGame] = useState({})
 
   function updateGame(game) {
@@ -31,13 +32,15 @@ export function App() {
           {/* START: routes */}
           <Routes>
             <Route
+            path="/"
+            element={<StartScreen></StartScreen>}>
+            </Route>
+            <Route
               path="/game"
               element={
                 <Board
                   player={player}
                   setPlayer={setPlayer}
-                  setWin={setWin}
-                  win={win}
                   game={game}
                 />
               }
