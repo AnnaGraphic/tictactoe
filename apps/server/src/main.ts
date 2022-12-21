@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as dotenv from 'dotenv';
 //import { Hallo } from 'tictactoe-typings';
 import * as cors from 'cors';
-import { setGame, insertUserXName,  getGames, setWin } from './db';
+import { insertUserO, insertUserXName,  getGames, setWin } from './db';
 //import cookieSession from "cookie-session";
 // import { SessionData, } from 'express-session';
 const app = express();
@@ -46,35 +46,33 @@ app.use((req, res, next) => {
 // +++++++ routes +++++++
 
 // +++ set userstuff for X +++
-// app.post('/api/userx', (req, res) => {
-//   console.log('req.body', req.body);
-//    console.log("req.session", req.session)
-//   const { username } = req.body;
-//   const { avatar } = req.body;
-//   insertUserXName(username, avatar)
-//     .then((game) => {
-//       console.log('game', game);
-//       //req.session.gameid = game.id;
-//       //console.log("X req.session", req.session)
-//       res.json({ success: true });
-//     })
-//     .catch((err) => {
-//       // uh oh
-//       console.log(err);
-//     });
-// });
-
-// +++ write game into table+++
-app.post('/api/setGame', (req, res) => {
+app.post('/api/userx', (req, res) => {
   console.log('req.body', req.body);
    console.log("req.session", req.session)
-  const { user_x } = req.body;
-  const { user_x_avatar } = req.body;
-  const { user_o } = req.body;
-  const { user_o_avatar } = req.body;
-  setGame(user_x, user_x_avatar, user_o, user_o_avatar,)
+  const { username } = req.body;
+  const { avatar } = req.body;
+  insertUserXName(username, avatar)
     .then((game) => {
       console.log('game', game);
+      //req.session.gameid = game.id;
+      //console.log("X req.session", req.session)
+      res.json({ success: true , id: game.id});
+    })
+    .catch((err) => {
+      // uh oh
+      console.log(err);
+    });
+});
+
+// +++ write uaer o into table+++
+app.post('/api/usero', (req, res) => {
+  console.log('req.body', req.body);
+   //console.log("req.session", req.session)
+  const { game_id, username, avatar } = req.body;
+
+  insertUserO( username, avatar, game_id,)
+    .then((game) => {
+      console.log('game in user o', game);
       // console.log("req.session", req.session);
       res.json({ success: true });
     })
@@ -84,17 +82,17 @@ app.post('/api/setGame', (req, res) => {
     });
 });
 
-// +++ get games ) +++
-app.get('/api/getgames', (req, res) => {
-  console.log("getgames", req.body);
-getGames().then((games) => {
-  console.log("games ", games);
-res.json((games))
-}).catch((err) => {
-      // uh oh
-      console.log(err);
-    });
-})
+// // +++ get games ) +++
+// app.get('/api/getgames', (req, res) => {
+//   console.log("getgames", req.body);
+// getGames().then((games) => {
+//   console.log("games ", games);
+// res.json((games))
+// }).catch((err) => {
+//       // uh oh
+//       console.log(err);
+//     });
+// })
 
 // +++ set win ) +++
 app.post('api/win', (req, res) => {
