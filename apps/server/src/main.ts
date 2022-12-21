@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as dotenv from 'dotenv';
 //import { Hallo } from 'tictactoe-typings';
 import * as cors from 'cors';
-import { insertUserO, insertUserXName,  getGames, setWin } from './db';
+import { insertUserO, insertUserXName,  getGame, setWin } from './db';
 //import cookieSession from "cookie-session";
 // import { SessionData, } from 'express-session';
 const app = express();
@@ -64,7 +64,7 @@ app.post('/api/userx', (req, res) => {
     });
 });
 
-// +++ write uaer o into table+++
+// +++ write user o into table+++
 app.post('/api/usero', (req, res) => {
   console.log('req.body', req.body);
    //console.log("req.session", req.session)
@@ -93,6 +93,18 @@ app.post('/api/usero', (req, res) => {
 //       console.log(err);
 //     });
 // })
+
+// // +++ get current game ) +++
+app.get('/api/getgame/:id', (req, res) => {
+  console.log("getgame ", req.params.id);
+getGame(req.params.id).then((game) => {
+  console.log("game ", game);
+res.json((game))
+}).catch((err) => {
+      // uh oh
+      console.log(err);
+    });
+})
 
 // +++ set win ) +++
 app.post('api/win', (req, res) => {
