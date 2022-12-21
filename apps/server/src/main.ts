@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as dotenv from 'dotenv';
 //import { Hallo } from 'tictactoe-typings';
 import * as cors from 'cors';
-import { insertUserXName, insertUserOName, getGames } from './db';
+import { setGame, insertUserXName,  getGames, setWin } from './db';
 //import cookieSession from "cookie-session";
 // import { SessionData, } from 'express-session';
 const app = express();
@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   console.log('---------------------');
   console.log('req.url:', req.url);
   console.log('req.method:', req.method);
-  console.log('req.session:', req.session);
+  // console.log('req.session:', req.session);
   // console.log('req.session.userId:', req.session.userId);
   console.log('---------------------');
   next();
@@ -46,36 +46,36 @@ app.use((req, res, next) => {
 // +++++++ routes +++++++
 
 // +++ set userstuff for X +++
-app.post('/api/userx', (req, res) => {
+// app.post('/api/userx', (req, res) => {
+//   console.log('req.body', req.body);
+//    console.log("req.session", req.session)
+//   const { username } = req.body;
+//   const { avatar } = req.body;
+//   insertUserXName(username, avatar)
+//     .then((game) => {
+//       console.log('game', game);
+//       //req.session.gameid = game.id;
+//       //console.log("X req.session", req.session)
+//       res.json({ success: true });
+//     })
+//     .catch((err) => {
+//       // uh oh
+//       console.log(err);
+//     });
+// });
+
+// +++ write game into table+++
+app.post('/api/setGame', (req, res) => {
   console.log('req.body', req.body);
    console.log("req.session", req.session)
-  const { username } = req.body;
-  const { avatar } = req.body;
-  insertUserXName(username, avatar)
+  const { user_x } = req.body;
+  const { user_x_avatar } = req.body;
+  const { user_o } = req.body;
+  const { user_o_avatar } = req.body;
+  setGame(user_x, user_x_avatar, user_o, user_o_avatar,)
     .then((game) => {
       console.log('game', game);
-      //req.session.gameid = game.id;
-      //console.log("X req.session", req.session)
-      res.json({ success: true });
-    })
-    .catch((err) => {
-      // uh oh
-      console.log(err);
-    });
-});
-
-// +++ set userstuff for O +++
-app.post('/api/usero', (req, res) => {
-  console.log('req.body', req.body);
-   console.log("req.session", req.session)
-  const { username } = req.body;
-  const { avatar } = req.body;
-  const { user_x } = req.body;
-  //hardcoded cookie
-  insertUserOName(username, avatar, user_x)
-    .then((game) => {
-      // console.log('game', game);
-      console.log("req.session", req.session);
+      // console.log("req.session", req.session);
       res.json({ success: true });
     })
     .catch((err) => {
@@ -91,6 +91,16 @@ getGames().then((games) => {
   console.log("games ", games);
 res.json((games))
 }).catch((err) => {
+      // uh oh
+      console.log(err);
+    });
+})
+
+// +++ set win ) +++
+app.post('api/win', (req, res) => {
+   console.log('req.body', req.body);
+   const {win} = req.body;
+   setWin(win).catch((err) => {
       // uh oh
       console.log(err);
     });
