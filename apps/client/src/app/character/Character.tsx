@@ -23,8 +23,8 @@ export function Character(props) {
         <div className="left">
           <div className="UserName">
             <div className="userName">
-              {!props.game.user_x && <h5>set a name:</h5>}
-              {username && <h5>{props.game.user_x}</h5>}
+              {/* {!props.game.user_x && <h5>set a name:</h5>}
+              {username && <h5>{props.game.user_x}</h5>} */}
             </div>
             <input
               type="text"
