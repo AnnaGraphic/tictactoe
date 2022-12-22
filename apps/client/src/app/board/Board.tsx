@@ -1,16 +1,17 @@
+//import './board.module.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-//import './board.module.css';
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { Square } from '../square/Square';
 import { Display } from '../display/Display';
 import { DisplayPlayerX } from '../display/DisplaPlayerX';
 import { DisplayPlayerO } from '../display/DisplaPlayerO';
 import { StartButton } from '../button/StartButton';
+import { SubmitButton } from '../button/SubmitButton'
 
 function checkforWin(board) {
-//onsole.log("board.", board);
-
+//console.log("board.", board);
   const winCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -34,47 +35,35 @@ function checkforWin(board) {
     }
   });
   //console.log('checkforwin');
-  // returns tie/ winner:
   return winner ? winner : board.includes('') ? null : 'No one';
+
 }
 
-
-
 export function Board(props) {
-  console.log("props in board", props)
+ // console.log("props in board", props)
   const [board, setBoard] = useState(['', '', '', '', '', '', '', '', '']);
-  //let ergebnis = null;
-  //const [thisGame, setThisGame] = useState({})
   const [win, setWin] = useState(null);
-   console.log("win", win)
- 
-// useEffect fuer aktuelles game (cookie-id) ?
-//  useEffect(() => {
-//         fetch(`http://localhost:3333/api/getgame/${props.game.game_id}`)
-//             .then((res) => res.json())
-//             .then((response) => {
-//                 if (response) {
-//                     console.log("response in board ", response);
-//                     //"success true"
-//                     //eintraege setzen
-//              setThisGame(response)
-//              console.log("thisGamet", thisGame)
-//                 } else {
-//                     console.log("success false")
-//                 }
-//             }).catch((err) => {console.log(err)})
-//     }, []);
+  const game_id = props.game.game_id
+  const location = useNavigate();
+  const audios  = ['../assets/audio/fist-punch-3.mp3', '../assets/audio/middle-punch1.mp3', '../assets/audio/punch.mp3', '../assets/audio/ough.mp3',];
+
+   let audio = new Audio(audios[Math.floor(Math.random() * audios.length)]);
+   const start = () => {
+    audio.play()
+   }
 
 const handleClick = () => {
- // console.log('click', board)
+// console.log('click', board)
+// audio.play();
 setBoard(['', '', '', '', '', '', '', '', '']);
 }
 const handleRevenge = () => {
- // console.log('click', board)
-location.replace("/")
+// console.log('click', board)
+// location.replace("/")
 }
 
   function handleTurn(i, newValue) {
+    audio.play();
     let hasUpdated = false;
    // console.log('click');
     let newBoard = board.map((oldValue, index) => {
@@ -96,9 +85,28 @@ location.replace("/")
       console.log('some message to player - square is occupied');
     }
     setWin(checkforWin(newBoard))
-    ///
-   // console.log('game in board', props.game);
+       
   }
+
+//let ergebnis = null;
+//const [thisGame, setThisGame] = useState({})
+
+// useEffect fuer aktuelles game (cookie-id) ?
+//  useEffect(() => {
+//         fetch(`http://localhost:3333/api/getgame/${props.game.game_id}`)
+//             .then((res) => res.json())
+//             .then((response) => {
+//                 if (response) {
+//                     console.log("response in board ", response);
+//                     //"success true"
+//                     //eintraege setzen
+//              setThisGame(response)
+//              console.log("thisGamet", thisGame)
+//                 } else {
+//                     console.log("success false")
+//                 }
+//             }).catch((err) => {console.log(err)})
+//     }, []);
 
   return (
      <div className='aroundthegame'>
@@ -128,15 +136,24 @@ location.replace("/")
       game={props.game}
       ></DisplayPlayerO>
     </div>
+    
      {!win && (
-                    <StartButton
-handleClick={handleClick}
-text="reset"></StartButton>
-                )}
-                     {win && (
-                    <StartButton
-handleClick={handleRevenge}
-text="revenge"></StartButton>
+          <StartButton
+            handleClick={handleClick}
+            text="reset">
+          </StartButton>
+          )}
+      {win && (            
+         <SubmitButton
+              route="/api/win"
+              payload={{ win, game_id}}
+              onSuccess={(response) => {
+              location("props.link");
+              console.log("api/win", response)
+              }}
+              onError={(err) => {console.log(err)}}
+              text="revenge"
+            ></SubmitButton>
                 )}
 
    </div>
