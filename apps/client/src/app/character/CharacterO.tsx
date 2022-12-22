@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { SubmitButton } from '../button/SubmitButton';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 export function CharacterO(props) {
@@ -11,14 +11,14 @@ export function CharacterO(props) {
   // const user_x = props.game.user_x;
   // const user_x_avatar = props.game.user_x_avatar;
   const game_id = props.game.game_id
-  console.log("gameid", game_id)
+ // console.log("gameid", game_id)
 
   const avatarChoice = (e) => {
     setAvatar(e.target.value);
-    console.log("avatar O", avatar)
+    //console.log("avatar O", avatar)
   };
   
-console.log('game in O ', props.game);
+//console.log('game in O ', props.game);
 
   return (
     <div className="character">
@@ -27,7 +27,7 @@ console.log('game in O ', props.game);
         <div className="left"> 
           <div className="UserName">
             <div className="userName">
-              {!props.game.user_o && <p>enter yor name:</p>}
+              {!props.game.user_o &&  <h5>set a name:</h5>}
               {username && <h5>{props.game.user_o}</h5>}
             </div>
             <input
@@ -127,7 +127,7 @@ console.log('game in O ', props.game);
               payload={{ username, avatar, game_id }}
               onSuccess={() => {
                 props.updateGame({...props.game, user_o: username,  user_o_avatar: avatar})
-                console.log('game O', props.game);
+                // console.log('game O', props.game);
                 // console.log(props.link)
                 location(props.link)
               }}

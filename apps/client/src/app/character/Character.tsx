@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { SubmitButton,  } from '../button/SubmitButton';
 import { StartButton } from '../button/StartButton';
 import { useState, useEffect} from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 export function Character(props) {
@@ -13,7 +13,7 @@ export function Character(props) {
   //const [editName, setEditName] = useState(false);
   const avatarChoice = (e) => {
     setAvatar(e.target.value);
-    console.log("avatar still anna?", avatar)
+   // console.log("avatar still anna?", avatar)
   };
 
   return (
@@ -23,7 +23,7 @@ export function Character(props) {
         <div className="left">
           <div className="UserName">
             <div className="userName">
-              {!props.game.user_x && <p>enter yor name:</p>}
+              {!props.game.user_x && <h5>set a name:</h5>}
               {username && <h5>{props.game.user_x}</h5>}
             </div>
             <input
