@@ -82,7 +82,8 @@ export function setWin(win, id) {
 
 export function getGames() {
   return db.
-  query(`SELECT * FROM games WHERE win <> ''`
+  query(`SELECT * FROM games WHERE win <> ''
+  ORDER BY id DESC`
   ).then((result) => {
     //console.log('result.rows in getGames ', result.rows)
       return result.rows;
