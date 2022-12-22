@@ -20,7 +20,8 @@
     "regenerator-runtime": "0.13.7",
     "socket.io": "^4.5.4",
     "spiced-pg": "^1.0.4",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "use-sound": "^4.0.1"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
