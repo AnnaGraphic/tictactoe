@@ -67,6 +67,18 @@ export function insertUserO(user_o, user_o_avatar, id) {
     })
     .catch((err) => console.log("error in user O db", err));
 }
+export function setWin(win, id) {
+  return db.query(
+   `UPDATE games 
+      SET win=$1 WHERE id=$2
+      RETURNING*`,
+      [win, id]) .then((result) => {
+        console.log("result set win", result.rows[0])
+      return result.rows[0];
+    })
+    .catch((err) => console.log("error in user O db", err));
+
+}
 
 export function getGames() {
   return db.
@@ -91,9 +103,9 @@ export function getGame(id) {
 }
 
 
-export function setWin(win) {
-  return db.query( `UPDATE games 
-      SET win=$1
-      RETURNING*`,
-      [win])
-}
+// export function setWin(win) {
+//   return db.query( `UPDATE games 
+//       SET win=$1
+//       RETURNING*`,
+//       [win])
+// }
