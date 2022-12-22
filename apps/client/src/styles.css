@@ -21,11 +21,13 @@
   height: 100vh;
   width: 100vw;
   background-color: rgb(183, 189, 168);
+  overflow: hidden;
 }
 /* Navbar */
 .navbar {
   display: flex;
   align-items: baseline;
+  justify-content: space-between;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
   background-color: var(--highlight);
 }
@@ -42,13 +44,51 @@ p.bangers{
   font-size: xx-large;
 }
 
+/* dropdown */
+.dropdown {
+position: relative;
+display: flex;
+justify-content: right;
+min-width: 160px;
+margin-right: 0.5rem;
+
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  margin-top: 1.5rem;
+  background-color: var(--secondary-color);
+  min-width: 160px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+  padding: 12px 16px;
+  z-index: 1;
+  
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  transition: 210ms all ease-in-out;
+}
+
+/* start */
+.startScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 9rem;;
+  height: 100vh;
+  overflow: hidden;
+  }
+
 /* Board */
 .aroundthegame {
-  display: flex;
+display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
 }
+
 .game {
   /* background-color: rgb(170, 201, 213); */
   background-color: transparent;
@@ -143,6 +183,7 @@ img.avatar {
 }
 
 .UserName {
+  width: 100%;
   margin: 15px;
 }
 
@@ -167,7 +208,14 @@ img.avatar {
     transform: translate(0, -0px);
   }
 }
+div.chooseAvatar{
+/* background-color: aliceblue; */
+}
+form.radios{
 
+  display: flex;
+  flex-grow: 1;
+}
 input {
   color: var(--main-color);
 }
@@ -175,6 +223,8 @@ input {
 [type='text'] {
   background-color: var(--highlight);
   border-style: none;
+  margin: 0.25rem 0.25rem 0.25rem 0rem;
+  padding: 0.25rem;
 }
 
 [type='radio'] {
@@ -189,13 +239,17 @@ input {
 
 img.icons {
   width: 100px;
-  float: inline-start;
-  position: relative;
+
 }
-border img.icons:hover {
+
+img.icons:active {
+width: 98px;
+transition: all 0.4s;
+}
+/* border img.icons:hover {
   width: 105px;
   transition: all 0.4s;
-}
+} */
 span {
   display: inline-block;
   width: 100px;
@@ -206,25 +260,42 @@ input[type='radio'] + span {
   border-radius: 50%;
   background: transparent;
   background-size: contain;
-  justify-self: center;
-  padding: 12px;
-  transition: all 0.4s;
+  /* justify-self: center; */
+  transition: all 300ms;
 }
 input[type='radio']:checked + span {
   background-color: var(--highlight);
-  transition: all 0.4s;
+  border: var(--main-color);
+  border-style: outset;
+  border-width: 1rem;
+  /* border-radius: 100%; */
+  transition: ease-in-out 300ms;
 }
+
 /* :hover? */
+
+.submitbuttoncharacterform {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
 
 /* wall of fame */
 
-.container {
-  max-width: 1000px;
+.table-container {
+  max-width: 100vh;
   margin-left: auto;
   margin-right: auto;
   padding-left: 10px;
   padding-right: 10px;
 }
+
+.responsive-table{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
 
 h2 {
   font-size: 26px;
@@ -237,33 +308,37 @@ li {
   padding: 25px 30px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
+
 .table-header {
   background-color: var(--main-color);
   font-size: 14px;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
 }
 .table-row {
   background-color: var(--secondary-color);
   box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
 }
 .col-1 {
-  flex-basis: 10%;
+  flex-basis: 20%;
 }
 .col-2 {
-  flex-basis: 40%;
+  flex-basis: 20%;
 }
 .col-3 {
-  flex-basis: 25%;
+  flex-basis: 20%;
 }
 .col-4 {
-  flex-basis: 25%;
+  flex-basis: 20%;
+}
+.col-5 {
+  flex-basis: 20%;
 }
 
 /* button */
-button.start {
+button {
 position: absolute;
 display: inline-block;
 position: relative;
@@ -271,17 +346,17 @@ background-color: var(--main-color);
 font-size: 1.2rem;
 border-radius: 1000px;
 border-width: 0;
-padding: 0.45rem;
+padding: 0.55rem;
  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
 text-align: center;
 transition:  100ms;
 }
-button.start:hover {
+button:hover {
 background-color: var(--main-color-darker);
 }
-button.start:active {
-  transition: 100ms all ease-in-out;
-padding: 0.40rem;
+button:active {
+transition: 100ms all ease-in-out;
+padding: 0.50rem;
 }
 
 
