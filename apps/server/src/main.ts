@@ -45,6 +45,7 @@ app.use((req, res, next) => {
 
 // +++++++ routes +++++++
 
+
 // +++ set userstuff for X +++
 app.post('/api/userx', (req, res) => {
   console.log('req.body', req.body);
@@ -107,10 +108,10 @@ res.json((game))
 })
 
 // +++ set win ) +++
-app.post('api/win', (req, res) => {
-   console.log('req.body', req.body);
-   const {win} = req.body;
-   setWin(win).catch((err) => {
+app.post('/api/win', (req, res) => {
+   console.log('req.body set win', req.body);
+   const {win, game_id} = req.body;
+   setWin(win, game_id).catch((err) => {
       // uh oh
       console.log(err);
     });
