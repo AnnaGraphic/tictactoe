@@ -27,6 +27,14 @@ export function App() {
             <div className="headline">
               <p className='bangers'>ultimate</p> <h1 className="headline">Tic Tac Toe</h1>
             </div>
+            <div className="dropdown">
+  <h1 className='dropdown'>X</h1>
+  <div className="dropdown-content">
+    <p><Link to={`/`}>start</Link></p>
+    <br />
+    <p><Link to={`/wall-of-fame`}>wall of fame</Link></p>
+  </div>
+</div>
           </div>
 
           {/* START: routes */}
@@ -42,6 +50,7 @@ export function App() {
                   player={player}
                   setPlayer={setPlayer}
                   game={game}
+                  link="/"
                 />
               }
             ></Route>
