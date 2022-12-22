@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as dotenv from 'dotenv';
 //import { Hallo } from 'tictactoe-typings';
 import * as cors from 'cors';
-import { insertUserO, insertUserXName,  getGame, setWin } from './db';
+import { insertUserO, insertUserXName,  getGame, getGames, setWin } from './db';
 //import cookieSession from "cookie-session";
 // import { SessionData, } from 'express-session';
 const app = express();
@@ -14,6 +14,8 @@ const { WEBSITE, SECRET } = process.env;
 //         gameid: number;
 //     }
 // }
+
+
 // +++++++ middleware +++++++
 
 app.use(cors({ origin: '*' }));
@@ -84,16 +86,16 @@ app.post('/api/usero', (req, res) => {
 });
 
 // // +++ get games ) +++
-// app.get('/api/getgames', (req, res) => {
-//   console.log("getgames", req.body);
-// getGames().then((games) => {
-//   console.log("games ", games);
-// res.json((games))
-// }).catch((err) => {
-//       // uh oh
-//       console.log(err);
-//     });
-// })
+app.get('/api/getgames', (req, res) => {
+  console.log("getgames", req.body);
+getGames().then((games) => {
+  console.log("games ", games);
+res.json((games))
+}).catch((err) => {
+      // uh oh
+      console.log(err);
+    });
+})
 
 // // +++ get current game ) +++
 app.get('/api/getgame/:id', (req, res) => {
