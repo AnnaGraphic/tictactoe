@@ -152,7 +152,7 @@ const handleRevenge = () => {
               console.log("api/win", response)
               }}
               onError={(err) => {console.log(err)}}
-              text={<Link to={`/`}>revenge</Link>}
+              text={<Link className='bangers' to={`/profile`}>revenge</Link>}
             ></SubmitButton>
                 )}
 

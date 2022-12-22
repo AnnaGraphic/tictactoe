@@ -43,7 +43,10 @@ p.bangers{
   font-family: Bangers;
   font-size: xx-large;
 }
-
+a.bangers{
+  font-family: Bangers;
+  font-size: xx-large;
+}
 /* dropdown */
 .dropdown {
 position: relative;
