@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Square } from '../square/Square';
 import { Display } from '../display/Display';
 import { DisplayPlayerX } from '../display/DisplaPlayerX';
@@ -152,7 +152,7 @@ const handleRevenge = () => {
               console.log("api/win", response)
               }}
               onError={(err) => {console.log(err)}}
-              text="revenge"
+              text={<Link to={`/`}>revenge</Link>}
             ></SubmitButton>
                 )}
 
