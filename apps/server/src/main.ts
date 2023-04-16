@@ -8,7 +8,7 @@ import { insertUserO, insertUserXName,  getGame, getGames, setWin } from './db';
 // import { SessionData, } from 'express-session';
 const app = express();
 dotenv.config();
-const { WEBSITE, SECRET } = process.env;
+const { WEBSITE, SECRET, PORT } = process.env;
 // declare module 'express-session' {
 //     interface SessionData {
 //         gameid: number;
@@ -119,8 +119,8 @@ app.post('/api/win', (req, res) => {
     });
 })
 
-const port = process.env.port || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
+//const port = process.env.port || 3333;
+const server = app.listen(PORT, () => {
+  console.log(`Listening at http://localhost:${PORT}/api`);
 });
 server.on('error', console.error);
