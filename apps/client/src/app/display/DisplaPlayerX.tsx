@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 export function DisplayPlayerX(props) {
-    console.log("props in display x", props, props.game)
+ //   console.log("props in display x", props, props.game)
 
 return (
     <div className="displayPlayers">
