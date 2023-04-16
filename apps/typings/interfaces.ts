@@ -20,3 +20,12 @@ export interface Game {
   win: string;
   created_at: Date;
 }
+
+export interface SessionData {
+  game: { [key: string]: any };
+  gameid: { [key: number]: any }
+}
+
+// export interface Session & Partial<SessionData>{
+//   gameid: { [key: number]: any }
+// }
