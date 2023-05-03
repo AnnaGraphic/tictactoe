@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  inherit (pkgs) lib;
+  inherit (pkgs) lib; # lib = pkgs.lib
 in
 
 pkgs.mkShell {
@@ -10,5 +10,8 @@ pkgs.mkShell {
   ];
   shellHook = ''
     export PATH=$PATH:${lib.escapeShellArg (toString ./.)}/node_modules/.bin
+    export DATABASE_URL=postgresql:///tictactoe
   '';
+
+
 }
