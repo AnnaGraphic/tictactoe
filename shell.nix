@@ -1,6 +1,10 @@
 { pkgs ? import <nixpkgs> {} }:
-  pkgs.mkShell {
-    nativeBuildInputs = [ 
-      pkgs.buildPackages.nodejs 
-      ];
+
+pkgs.mkShell {
+  nativeBuildInputs = [ 
+    pkgs.nodejs 
+  ];
+  shellHook = ''
+    PATH=$PATH:${toString ./.}/node_modules/.bin
+  '';
 }
