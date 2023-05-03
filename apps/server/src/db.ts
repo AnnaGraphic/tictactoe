@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-const database = 'ultimatetictactoe';
+const database = 'tictactoe';
 const spicedPg = require('spiced-pg');
 const db = spicedPg(process.env.DATABASE_URL);
 
