@@ -1,11 +1,8 @@
 import * as express from 'express';
 import * as path from 'path';
 import * as dotenv from 'dotenv';
-//import { Hallo } from 'tictactoe-typings';
 import * as cors from 'cors';
 import { insertUserO, insertUserXName,  getGame, getGames, setWin } from './db';
-//import cookieSession from "cookie-session";
-// import { SessionData, } from 'express-session';
 const app = express();
 dotenv.config();
 const { WEBSITE, SECRET, PORT } = process.env;
