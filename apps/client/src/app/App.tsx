@@ -24,15 +24,15 @@ export function App() {
       <div className="app">
         <BrowserRouter>
           <div className="navbar">
-            <div className="headline"><Link to={`/`}>
+            <div className="headline"><Link to={`/tictactoe/`}>
               <p className='bangers'>ultimate</p> <h1 className="headline">Tic Tac Toe</h1></Link>
             </div>
             <div className="dropdown">
   <h1 className='dropdown'>X</h1>
   <div className="dropdown-content">
-    <p><Link to={`/`}>start</Link></p>
+    <p><Link to={`/tictactoe/`}>start</Link></p>
     <br />
-    <p><Link to={`/wall-of-fame`}>wall of fame</Link></p>
+    <p><Link to={`/tictactoe/wall-of-fame`}>wall of fame</Link></p>
   </div>
 </div>
           </div>
@@ -40,31 +40,31 @@ export function App() {
           {/* START: routes */}
           <Routes>
             <Route
-            path="/"
+            path="/tictactoe/"
             element={<StartScreen></StartScreen>}>
             </Route>
             <Route
-              path="/game"
+              path="/tictactoe/game"
               element={
                 <Board
                   player={player}
                   setPlayer={setPlayer}
                   game={game}
-                  link="/"
+                  link="/tictactoe/"
                 />
               }
             ></Route>
 
             <Route
-              path="/wall-of-fame"
+              path="/tictactoe/wall-of-fame"
               element={<WallOfFame></WallOfFame>}
             ></Route>
-            <Route path="/profile" element={<Character
+            <Route path="/tictactoe/profile" element={<Character
                   game={game}
                   updateGame={updateGame}
                   link="/profileo"
             ></Character>}></Route>
-            <Route path="/profileo" element={<CharacterO
+            <Route path="/tictactoe/profileo" element={<CharacterO
                   game={game}
                   link="/game"
                   updateGame={updateGame}></CharacterO>}></Route>
