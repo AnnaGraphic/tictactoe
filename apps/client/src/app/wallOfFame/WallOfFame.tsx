@@ -7,10 +7,13 @@ import { Game } from 'tictactoe-typings';
 export function WallOfFame(props) {
   const [games, setGames] = useState([])
 
+  const server_endpoint = process.env.SERVER_ENDPOINT || "http://localhost:3334";
+
+
   // useEffect 1. (server fetchen) im then-block setGame
 
     useEffect(() => {
-        fetch('http://localhost:3333/api/getgames')
+        fetch(`${server_endpoint}/api/getgames`)
             .then((res) => res.json())
             .then((response) => {
                 if (response) {

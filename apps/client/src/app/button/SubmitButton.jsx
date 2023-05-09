@@ -1,10 +1,11 @@
 export function SubmitButton({ route, payload, onSuccess, onError, text }) {
+  const server_endpoint = process.env.SERVER_ENDPOINT || "http://localhost:3334";
+
   async function handleSubmit({ route, payload, onSuccess, onError }) {
     //console.log("About to submit the form!");
     console.log('payload', payload);
-    const host = 'http://localhost:3333';
     try{ 
-      const res = await fetch(host + route, {
+      const res = await fetch(`${server_endpoint}${route}`, {
         method: 'POST',
         // to send json body in a post, headers is required
         headers: {
