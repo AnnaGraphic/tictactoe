@@ -1,5 +1,6 @@
 export function SubmitButton({ route, payload, onSuccess, onError, text }) {
-  const server_endpoint = process.env.SERVER_ENDPOINT || "http://localhost:3334";
+  const server_endpoint = process.env.SERVER_ENDPOINT || "http://localhost:3334"
+  //const server_endpoint = "https://ultimate-tictactoe-server.onrender.com";
 
   async function handleSubmit({ route, payload, onSuccess, onError }) {
     //console.log("About to submit the form!");
