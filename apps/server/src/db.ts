@@ -1,10 +1,51 @@
 import * as dotenv from 'dotenv';
-const spicedPg = require('spiced-pg');
-const db = spicedPg(process.env.DATABASE_URL);
+
+const pg = require('pg');
+
+const dbUrl = require('url').parse(process.env.DATABASE_URL);
+
+const dbUser = dbUrl.auth.split(':');
+
+const dbConfig = {
+    user: dbUser[0],
+    database: dbUrl.pathname.slice(1),
+    password: dbUser[1],
+    host: dbUrl.hostname,
+    port: dbUrl.port || 5432,
+    max: 10,
+    idleTimeoutMillis: 30000,
+    ssl: dbUrl.hostname != 'localhost' && dbUrl.hostname != '127.0.0.1' && {
+        rejectUnauthorized: false
+    }
+};
+
+const pool = new pg.Pool(dbConfig);
+
+pool.on('error', function(err) {
+    console.log(err);
+});
+
+function query(query, params) : any {
+    return new Promise(function(resolve, reject) {
+        pool.connect(function(err, client, done) {
+            if (err) {
+                reject(err);
+            } else {
+                client.query(query, params, function(err, data) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(data);
+                    }
+                    done();
+                });
+            }
+        });
+    });
+}
 
 export function setGame(user_x, user_x_avatar, user_o, user_o_avatar) {
-  return db
-    .query(
+  return query(
       `INSERT INTO games (user_x, user_x_avatar, user_o, user_o_avatar) VALUES($1, $2, $3, $4)
         RETURNING*`,
       [user_x, user_x_avatar, user_o, user_o_avatar]
@@ -22,8 +63,7 @@ export function setGame(user_x, user_x_avatar, user_o, user_o_avatar) {
 }
 
 export function insertUserXName(name_x, avatar) {
-  return db
-    .query(
+  return query(
       `INSERT INTO games (user_x, user_x_avatar) VALUES($1, $2)
         RETURNING*`,
       [name_x, avatar]
@@ -42,9 +82,7 @@ export function insertUserXName(name_x, avatar) {
 
 export function insertUserO(user_o, user_o_avatar, id) {
   //console.log("user_o, user_o_avatar, id", user_o, user_o_avatar, id)
-  return db
-  
-    .query(
+  return query(
       // `UPDATE games 
       // SET user_o=$1, user_o_avatar=$2 WHERE id=$3
       // RETURNING*`,
@@ -67,7 +105,7 @@ export function insertUserO(user_o, user_o_avatar, id) {
     .catch((err) => console.log("error in user O db", err));
 }
 export function setWin(win, id) {
-  return db.query(
+  return query(
    `UPDATE games 
       SET win=$1 WHERE id=$2
       RETURNING*`,
@@ -80,9 +118,8 @@ export function setWin(win, id) {
 }
 
 export function getGames() {
-  return db.
-  query(`SELECT * FROM games WHERE win <> ''
-  ORDER BY id DESC`
+  return query(`SELECT * FROM games WHERE win <> ''
+  ORDER BY id DESC`, []
   ).then((result) => {
     //console.log('result.rows in getGames ', result.rows)
       return result.rows;
@@ -92,10 +129,8 @@ export function getGames() {
 
 export function getGame(id) {
  // console.log("id", id)
-  return db.
-  query(`SELECT * FROM games WHERE id=$1`,
-  [id]
-  ).then((result) => {
+  return query(`SELECT * FROM games WHERE id=$1`, [id])
+  .then((result) => {
     console.log('result.rows in getGame ', result.rows)
       return result.rows[0];
     })
@@ -104,7 +139,7 @@ export function getGame(id) {
 
 
 // export function setWin(win) {
-//   return db.query( `UPDATE games 
+//   return query( `UPDATE games 
 //       SET win=$1
 //       RETURNING*`,
 //       [win])
