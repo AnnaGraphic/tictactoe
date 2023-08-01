@@ -4,20 +4,31 @@ const pg = require('pg');
 
 const dbUrl = require('url').parse(process.env.DATABASE_URL);
 
-const dbUser = dbUrl.auth.split(':');
-
-const dbConfig = {
-    user: dbUser[0],
-    database: dbUrl.pathname.slice(1),
-    password: dbUser[1],
-    host: dbUrl.hostname,
-    port: dbUrl.port || 5432,
-    max: 10,
-    idleTimeoutMillis: 30000,
-    ssl: dbUrl.hostname != 'localhost' && dbUrl.hostname != '127.0.0.1' && {
-        rejectUnauthorized: false
-    }
-};
+const dbConfig =
+      (() => {
+          if (dbUrl.hostname) {
+              // TCP case
+              const dbUser = dbUrl.auth.split(':');
+              return {
+                  user: dbUser[0],
+                  database: dbUrl.pathname.slice(1),
+                  password: dbUser[1],
+                  host: dbUrl.hostname,
+                  port: dbUrl.port || 5432,
+                  max: 10,
+                  idleTimeoutMillis: 30000,
+                  ssl: dbUrl.hostname != 'localhost' && dbUrl.hostname != '127.0.0.1' && {
+                      rejectUnauthorized: false
+                  }
+              };
+          } else {
+              // UNIX socket case
+              return {
+                  user: process.env.USER,
+                  database: dbUrl.pathname.slice(1),
+              }
+          }
+      })();
 
 const pool = new pg.Pool(dbConfig);
 
