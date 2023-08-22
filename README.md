@@ -1,7 +1,10 @@
-# Tictactoe
+# ⭕TicTacToe❌
+**To play 👉 [this way](http://tictactoe.panda.krebsco.de/)** ✨🚀
 
-run `nx serve server`
-run `nx serve client`
+## TODO
+- CSS: responsive design
+    - mobile view
+    - reset fixed sizes
 
 <a href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
