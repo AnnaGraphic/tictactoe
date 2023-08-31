@@ -45,7 +45,6 @@ export function CharacterO(props) {
             <h5>select a player</h5>
             <form className="radios">
               <label htmlFor="hulk" className="icons">
-                <i></i>
                 <input
                   type="radio"
                   name="avatar"
@@ -64,7 +63,6 @@ export function CharacterO(props) {
               </label>
 
               <label htmlFor="anna" className="icons">
-                <i></i>
                 <input
                   type="radio"
                   name="avatar"
@@ -83,7 +81,6 @@ export function CharacterO(props) {
               </label>
 
               <label htmlFor="kuma" className="icons">
-                <i></i>
                 <input
                   type="radio"
                   name="avatar"
@@ -101,8 +98,7 @@ export function CharacterO(props) {
                 </span>
               </label>
 
- <label htmlFor="cyclops" className="icons">
-                <i></i>
+              <label htmlFor="cyclops" className="icons">
                 <input
                   type="radio"
                   name="avatar"

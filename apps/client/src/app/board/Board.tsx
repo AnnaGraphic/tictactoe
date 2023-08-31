@@ -36,9 +36,7 @@ function checkforWin(board) {
   });
   //console.log('checkforwin');
   return winner ? winner : board.includes('') ? null : 'No one';
-
 }
-
 export function Board(props) {
  // console.log("props in board", props)
   const [board, setBoard] = useState(['', '', '', '', '', '', '', '', '']);
@@ -46,21 +44,19 @@ export function Board(props) {
   const game_id = props.game.game_id
   const location = useNavigate();
   const audios  = ['../assets/audio/fist-punch-3.mp3', '../assets/audio/middle-punch1.mp3', '../assets/audio/punch.mp3', '../assets/audio/ough.mp3',];
-
    let audio = new Audio(audios[Math.floor(Math.random() * audios.length)]);
-   const start = () => {
-    audio.play()
-   }
-
-const handleClick = () => {
-// console.log('click', board)
-// audio.play();
-setBoard(['', '', '', '', '', '', '', '', '']);
-}
-const handleRevenge = () => {
-// console.log('click', board)
-// location.replace("/")
-}
+  const start = () => {
+   audio.play()
+  }
+  const handleClick = () => {
+  // console.log('click', board)
+  // audio.play();
+  setBoard(['', '', '', '', '', '', '', '', '']);
+  }
+  const handleRevenge = () => {
+  // console.log('click', board)
+  // location.replace("/")
+  }
 
   function handleTurn(i, newValue) {
     audio.play();
@@ -84,8 +80,7 @@ const handleRevenge = () => {
     } else {
       console.log('some message to player - square is occupied');
     }
-    setWin(checkforWin(newBoard))
-       
+    setWin(checkforWin(newBoard))     
   }
 
 //let ergebnis = null;
@@ -109,53 +104,49 @@ const handleRevenge = () => {
 //     }, []);
 
   return (
-     <div className='aroundthegame'>
-    <div className="game">
-      <DisplayPlayerX
-      game={props.game}
-      ></DisplayPlayerX>
-        <div>
-      
-        <Display player={props.player} 
+    <div className='aroundthegame'>
+      <div className="game">
+        <DisplayPlayerX
+          game={props.game}>
+        </DisplayPlayerX>
+      <div>
+      <Display player={props.player} 
       win={win}
       game={props.game} 
       />
-    <div className="board">
+      <div className="board">
         {board.map((value, index) => (
           <Square
             key={index}
             fill={value}
             game={props.game}
             click={() => handleTurn(index, props.player)}
-        
           />
         ))}
-        </div>
       </div>
-      <DisplayPlayerO
-      game={props.game}
-      ></DisplayPlayerO>
-    </div>
-    
-     {!win && (
-          <StartButton
-            handleClick={handleClick}
-            text="reset">
-          </StartButton>
-          )}
+      </div>
+        <DisplayPlayerO
+        game={props.game}
+        ></DisplayPlayerO>
+      </div>
+      {!win && (
+        <StartButton
+        handleClick={handleClick}
+        text="reset">
+        </StartButton>
+      )}
       {win && (            
          <SubmitButton
-              route="/api/win"
-              payload={{ win, game_id}}
-              onSuccess={(response) => {
-              location("props.link");
-              console.log("api/win", response)
-              }}
-              onError={(err) => {console.log(err)}}
-              text={<Link className='bangers' to={`/profile`}>revenge</Link>}
-            ></SubmitButton>
-                )}
-
-   </div>
+          route="/api/win"
+          payload={{ win, game_id}}
+          onSuccess={(response) => {
+          location("props.link");
+          console.log("api/win", response)
+          }}
+          onError={(err) => {console.log(err)}}
+          text={<Link className='bangers' to={`/profile`}>revenge</Link>}
+      ></SubmitButton>
+      )}
+    </div>
   );
 }

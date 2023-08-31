@@ -21,7 +21,7 @@ export function Display(props) {
         <h3>{props.game.user_x} wins!</h3>
       </div>
     );
-   } else  if (props.win === 'O') {
+  } else  if (props.win === 'O') {
     return (
       <div className="display">
         <h3>{props.game.user_o} wins!</h3>

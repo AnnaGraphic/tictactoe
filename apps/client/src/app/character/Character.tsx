@@ -38,7 +38,6 @@ export function Character(props) {
             <h5>select a player</h5>
             <form className="radios">
               <label htmlFor="hulk" className="icons">
-                <i></i>
                 <input
                   type="radio"
                   name="avatar"
@@ -57,7 +56,6 @@ export function Character(props) {
               </label>
 
               <label htmlFor="anna" className="icons">
-                <i></i>
                 <input
                   type="radio"
                   name="avatar"
@@ -75,8 +73,7 @@ export function Character(props) {
                 </span>
               </label>
 
-<label htmlFor="kuma" className="icons">
-                <i></i>
+              <label htmlFor="kuma" className="icons">
                 <input
                   type="radio"
                   name="avatar"
@@ -93,8 +90,8 @@ export function Character(props) {
                   />
                 </span>
               </label>
+              
               <label htmlFor="cyclops" className="icons">
-                <i></i>
                 <input
                   type="radio"
                   name="avatar"

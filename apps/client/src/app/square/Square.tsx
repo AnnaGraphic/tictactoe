@@ -5,7 +5,7 @@ export function Square(props) {
 
  // console.log("square ", props.thisGame)
   
- if (props.fill === 'O' && props.game.user_o_avatar === props.game.user_x_avatar) {
+  if (props.fill === 'O' && props.game.user_o_avatar === props.game.user_x_avatar) {
     return (
       <button className="square" onClick={props.click}>
         <img
@@ -16,7 +16,7 @@ export function Square(props) {
       </button>
     );
   } 
- else if (props.fill === 'O') {
+  else if (props.fill === 'O') {
     return (
       <button className="square" onClick={props.click}>
         <img
@@ -26,7 +26,7 @@ export function Square(props) {
         />
       </button>
     );
-     } else if (props.fill === 'X') {
+  } else if (props.fill === 'X') {
     return (
       <button className="square" onClick={props.click}>
         <img

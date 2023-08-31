@@ -19,7 +19,7 @@ export function App() {
         console.log("updateGame", game);
     }
 
-  return (
+  return (  
     <>
       <div className="app">
         <BrowserRouter>
@@ -28,13 +28,13 @@ export function App() {
               <p className='bangers'>ultimate</p> <h1 className="headline">Tic Tac Toe</h1></Link>
             </div>
             <div className="dropdown">
-  <h1 className='dropdown'>X</h1>
-  <div className="dropdown-content">
-    <p><Link to={`/`}>start</Link></p>
-    <br />
-    <p><Link to={`/wall-of-fame`}>wall of fame</Link></p>
-  </div>
-</div>
+            <h1 className='dropdown'>X</h1>
+            <div className="dropdown-content">
+              <p><Link to={`/`}>start</Link></p>
+              <br />
+              <p><Link to={`/wall-of-fame`}>wall of fame</Link></p>
+            </div>
+          </div>
           </div>
 
           {/* START: routes */}
