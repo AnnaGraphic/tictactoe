@@ -336,7 +336,104 @@ padding: 0.50rem;
 }
 
 /* responsive */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) and (orientation:portrait) {
+.app {
+    overflow: hidden auto;
+  }
+  /* board */
+  .game {
+    width: auto;
+  }
+  .board {
+    display: grid;
+    width: fit-content;
+    gap: 0.25rem;
+  }
+  .square {
+    justify-self: center;
+    align-self: end;
+    width: 5rem;
+    height: 5rem;
+    font-size: large;
+    font-weight: bolder;
+  }
+  .left {
+    width: 25%;
+  }
+  .displayPlayers {
+    display: none;
+    z-index: -1;
+  }
+  /* character */
+  .card {
+    width: 100vw;
+    padding: 0.5rem;
+  }
+  .chooseAvatar h5 {
+    padding-left: 1rem;
+  }
+  /* XXX test */
+  form.radios {
+    max-width: 20%;
+  }
+  .radios span {
+    display: inline-block;
+    width: 5.75rem;
+    height: 5.75rem;
+    margin: 0.8rem;
+  }
+  .icons {
+    margin: 0;
+  }
+  /* card right */
+  .right {
+    position: relative;
+    right: 0;
+    top: 9rem;
+    width: 65%;
+  }
+  .avatarPic {
+    position: fixed;
+    width: 65%;
+  }
+  /* wall of fame */
+  .table-header {
+    display: none;
+  }
+  .table-row {
+    background-color: var(--highlight);
+  }
+  li {
+    display: block;
+  }
+  .col {
+    flex-basis: 100%;
+  }
+  .col {
+    display: flex;
+    padding: 10px 0;
+  }
+  col:before {
+    color: #6c7a89;
+    padding-right: 10px;
+    content: attr(data-label);
+    flex-basis: 50%;
+    text-align: right;
+  }
+  /* subit button */
+  .submitbuttoncharacterform {
+    position: fixed;
+    z-index: 1;
+    bottom: 1rem;
+    left: 50%;
+    /* to center to relative width and height:  */
+    transform: translate(-50%, -50%);
+  }
+}
+@media only screen and (max-width: 768px) and (orientation:landscape) {
+  .app {
+    overflow: hidden auto;
+  }
   /* board */
   .game {
     width: auto;
@@ -369,6 +466,13 @@ padding: 0.50rem;
     width: 100vw;
     padding: 0.5rem;
   }
+  .chooseAvatar h5 {
+    padding-left: 1rem;
+  }
+  /* XXX test */
+  form.radios {
+    max-width: 20%;
+  }
   .radios span {
     display: inline-block;
     width: 5.75rem;
@@ -377,6 +481,17 @@ padding: 0.50rem;
   }
   .icons {
     margin: 0;
+  }
+  /* card right */
+  .right {
+    position: relative;
+    right: 0;
+    top: 9rem;
+    width: 65%;
+  }
+  .avatarPic {
+    position: fixed;
+    width: 65%;
   }
   /* wall of fame */
   .table-header {
@@ -401,5 +516,14 @@ padding: 0.50rem;
     content: attr(data-label);
     flex-basis: 50%;
     text-align: right;
+  }
+  /* subit button */
+  .submitbuttoncharacterform {
+    position: fixed;
+    z-index: 1;
+    bottom: 1rem;
+    left: 50%;
+    /* to center to relative width and height:  */
+    transform: translate(-50%, -50%);
   }
 }
