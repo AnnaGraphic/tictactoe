@@ -5,6 +5,9 @@
 - CSS: responsive design
     - mobile view
     - reset fixed sizes
+    - hall of fame-table: fix date, show characters
+- audio: add more sounds at apt places
+
 
 <a href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
