@@ -18,7 +18,6 @@ export function App() {
         setGame(game)
         console.log("updateGame", game);
     }
-
   return (  
     <>
       <div className="app">
@@ -29,14 +28,13 @@ export function App() {
             </div>
             <div className="dropdown">
             <h1 className='dropdown'>X</h1>
-            <div className="dropdown-content">
-              <p><Link to={`/`}>start</Link></p>
-              <br />
-              <p><Link to={`/wall-of-fame`}>wall of fame</Link></p>
+              <div className="dropdown-content">
+                <p><Link to={`/`}>start</Link></p>
+                <br />
+                <p><Link to={`/wall-of-fame`}>wall of fame</Link></p>
+              </div>
             </div>
           </div>
-          </div>
-
           {/* START: routes */}
           <Routes>
             <Route
@@ -54,7 +52,6 @@ export function App() {
                 />
               }
             ></Route>
-
             <Route
               path="/wall-of-fame"
               element={<WallOfFame></WallOfFame>}
@@ -68,7 +65,7 @@ export function App() {
                   game={game}
                   link="/game"
                   updateGame={updateGame}></CharacterO>}></Route>
-          </Routes>
+            </Routes>
           {/* END: routes */}
         </BrowserRouter>
       </div>
