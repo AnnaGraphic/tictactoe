@@ -6,6 +6,7 @@
     - mobile view ✅
     - reset fixed sizes ✅
     - hall of fame-table: fix date, show characters
+    - send input via enter key
 - audio: add more sounds at apt places 🔊
 - graphics:🖌️find an alternative Anna-character
 - db: 🗃️ find solution to display winner/loser
